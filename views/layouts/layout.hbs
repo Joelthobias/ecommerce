@@ -62,18 +62,21 @@
             width: 46%;
           }
         }
-                @media(max-width:673px) {
-          .offcanvas-collapse{
+
+        @media(max-width:673px) {
+          .offcanvas-collapse {
             width: 52%;
           }
         }
-                @media(max-width:608px) {
-          .offcanvas-collapse{
+
+        @media(max-width:608px) {
+          .offcanvas-collapse {
             width: 57%;
           }
         }
-                @media(max-width:575px) {
-          .offcanvas-collapse{
+
+        @media(max-width:575px) {
+          .offcanvas-collapse {
             width: 80%;
           }
         }
@@ -180,6 +183,29 @@
       .navbar-toggle {
         z-index: 99999;
       }
+
+      .hr {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        border: 1;
+        border-top: 1px solid #00000059;
+        width: 100%;
+        background-color: #00000059;
+        margin-left: -15px;
+        height: 3px;
+        padding-right: 19px;
+      }
+      .r {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        border: 1;
+        border-top: 1px solid #00000059;
+        width: 100%;
+        background-color: #00000059;
+        margin-left: -15px;
+        height: -3em;
+        padding-right: 19px;
+      }
     </style>
   </head>
 
@@ -189,7 +215,7 @@
     {{else}}
       {{>user-header}}
     {{/if}}
-    
+
 
     {{{body}}}
 
