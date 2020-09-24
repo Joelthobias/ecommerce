@@ -30,7 +30,7 @@ router.get('/', function(req, res, next) {
             image: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ3HGIYPQa2BrDLP5zf2xHHEkptaRwPkDF8uQ&usqp=CAU"
         }
     ]
-    res.render('index', { products,admin:false });
+    res.render('index', { products,admin:true });
 });
 
 module.exports = router;
