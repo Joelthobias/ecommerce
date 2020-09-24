@@ -1,0 +1,9 @@
+{
+        "editor.defaultFormatter": "vscode.configuration-editing",
+        "editor.formatOnPaste": true,
+        "files.autoSaveDelay": 3000,
+        "[javascript]": {
+                "editor.defaultFormatter": "vscode.typescript-language-features"
+        },
+        "editor.accessibilityPageSize": 10000
+}

@@ -1,0 +1,176 @@
+<!Doctype html>
+<html lang="en">
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>{{title}}</title>
+    {{!-- <link rel="stylesheet" href="stylesheets/offcanvas.css"> --}}
+    <style>
+      html,body {
+        overflow-x: hidden;
+        /* Prevent scroll on narrow devices */
+      }
+
+      body {
+        padding-top: 56px;
+      }
+
+      @media (max-width: 991.98px) {
+        .offcanvas-collapse {
+          position: fixed;
+          top: 56px;
+          /* Height of navbar */
+          bottom: 0;
+          right: 100%;
+          width: 70%;
+          padding-right: 1rem;
+          padding-left: 1rem;
+          overflow-y: auto;
+          visibility: hidden;
+          background-color: #343a40;
+          transition: visibility .3s ease-in-out, -webkit-transform .3s ease-in-out;
+          transition: transform .3s ease-in-out, visibility .3s ease-in-out;
+          transition: transform .3s ease-in-out, visibility .3s ease-in-out, -webkit-transform .3s ease-in-out;
+        }
+
+        .offcanvas-collapse.open {
+          visibility: visible;
+          -webkit-transform: translateX(-100%);
+          transform: translateX(100%);
+        }
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        color: rgba(255, 255, 255, .75);
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .nav-underline .nav-link {
+        padding-top: .75rem;
+        padding-bottom: .75rem;
+        font-size: .875rem;
+        color: #6c757d;
+      }
+
+      .nav-underline .nav-link:hover {
+        color: #007bff;
+      }
+
+      .nav-underline .active {
+        font-weight: 500;
+        color: #343a40;
+      }
+
+      .text-white-50 {
+        color: rgba(255, 255, 255, .5);
+      }
+
+      .bg-purple {
+        background-color: #6f42c1;
+      }
+
+      .lh-100 {
+        line-height: 1;
+      }
+
+      .lh-125 {
+        line-height: 1.25;
+      }
+
+      .lh-150 {
+        line-height: 1.5;
+      }
+
+
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: .25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #f8f9fa;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: #343a40;
+    border: 0;
+}
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 10rem;
+    padding: .5rem 0;
+    margin: .125rem 0 0;
+    font-size: 1rem;
+    color: #21252900;
+    text-align: left;
+    list-style: none;
+    background-color: #343a40;
+    background-clip: padding-box;
+    border: 0px;
+    border-radius: .25rem;
+}
+
+    </style>
+  </head>
+
+  <body>
+    {{#if admin}}
+      {{>admin-header}}
+    {{else}}
+      {{>user-header}}
+    {{/if}}
+
+    {{{body}}}
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"></script>
+    
+    <script>
+     $(function () {
+        'use strict'
+
+        $('[data-toggle="offcanvas"]').on('click', function () {
+          $('.offcanvas-collapse').toggleClass('open')
+        })
+      }) 
+    </script>
+  </body>
+
+</html>
