@@ -1,34 +1,39 @@
 <section>
-        <div class="container ">
 
-                <div class="row mt-3">
-                        <h1 class="mx-auto"> <b> View-products </b> </h1>
-                        <a class="btn btn-success m-3 ml-auto" href="/admin/add-product">Add product</a>
+
+        <div class="container mt-4">
+                <div class="row">
+                        <div class="col-md-8">
+                                <h2 class="text-center">
+                                        edit Products
+                                </h2>
+                                <form action="/admin/edit-product/{{product._id}}" method="POST" enctype="multipart/form-data">
+                                        <label for="name">Name</label>
+                                        <input type="text" name="name" class="form-control" value="{{product.name}}">
+
+                                        <label for="catagory">Catagory</label>
+                                        <input type="text" name="catagory" class="form-control" value="{{product.catagory}}">
+                                        
+                                        <label for="price">Price</label>
+                                        <input type="text" name="price" class="form-control" value="{{product.price}}">
+                                        
+                                        <label for="description">Description</label>
+                                        <input type="text" name="description" class="form-control" value="{{product.description}} ">
+                                        
+                                        <label for="">Image</label>
+                                        <img src="/product-images/{{product._id}}.jpg" style="width: 100px;height: 100px;" alt="" id="asd" srcset="">
+                                        
+                                        <input type="file" name="image" id="imgInp" class="form-control" onchange="myf(event)">
+                                        
+                                        <a href="/admin " class="btn btn-success mt-4 mr-auto">Go back</a>
+                                        <button type="submit" class="btn btn-primary mt-4 ml-auto">Submit</button>
+                                </form>
+                        </div>
                 </div>
-                <table class="table  mt-4">
-
-                        <thead>
-                                <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Catagory</th>
-                                        <th scope="col">Description</th>
-                                        <th scope="col">Image</th>
-                                </tr>
-                        </thead>
-                        <tbody>
-                                {{#each products}}
-                                        <tr>
-                                                <th scope="row">1</th>
-                                                <td>{{this.name}} </td>
-                                                <td>{{this.catagory}}</td>
-                                                <td>{{this.description}} </td>
-                                                <td><img src="/product-images/{{this._id}}.jpg" height="100px" alt=""
-                                                                srcset=""> </td>
-                                                <td>{{this._id}} </td>
-                                        </tr>
-                                {{/each}}
-                        </tbody>
-                </table>
         </div>
 </section>
+<script>
+        function myf(event){
+                document.getElementById('asd').src=URL.createObjectURL(event.target.files[0])
+        }
+</script>

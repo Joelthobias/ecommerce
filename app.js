@@ -10,6 +10,8 @@ const { extname } = require('path');
 var fileupload=require('express-fileupload')
 var app = express();
 var db=require('./config/connection')
+var session=require('express-session');
+const { DESTRUCTION } = require('dns');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -20,7 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileupload())
-
+app.use(session({secret:"key",cookie:{maxAge:600000000}}))
 db.connect((err)=>{
   if(err) console.log("failed to connect"+err);
   else console.log("database connected");
