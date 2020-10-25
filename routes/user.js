@@ -107,11 +107,12 @@ router.get('/add-to-cart/:id',(req,res)=>{
 
 
 
-router.post("/chngQuantitiy",async (req, res, next) => {
-  userhelper.chngQuantitiy(req.body).then(async(removeproduct) => {
+router.post("/chngQuantitiy",(req, res,next) => {
+
+  userhelper.chngQuantitiy(req.body).then(async (response) => {
     response.total = await userhelper.getTotal(req.body.user);
-    console.log(req.body.user);
-    res.json(removeproduct);
+    
+    res.json(response);
 
   });
 });

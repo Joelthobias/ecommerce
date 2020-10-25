@@ -191,7 +191,7 @@ module.exports = {
             }
           )
           .then((response) => {
-            resolve({status:true});
+            resolve({status:true });
           });
       }
     });
