@@ -1,3 +1,4 @@
+const { response } = require("express");
 var express = require("express");
 const { reset } = require("nodemon");
 var router = express.Router();
@@ -83,10 +84,14 @@ router.get("/logout", (req, res) => {
 
 
 router.get('/cart',verifylogin,async (req,res)=>{
+  let total = await userhelper.getTotal(req.session.user._id);
+ 
 
 let products = await userhelper.getCartProducts(req.session.user._id);
 
-  res.render('user/cart',{products,user:req.session.user})
+  products.quantitiy = parseInt(products.quantitiy);
+
+  res.render("user/cart", { products, user: req.session.user._id ,total});
   console.log(products);
 })
 
@@ -102,7 +107,19 @@ router.get('/add-to-cart/:id',(req,res)=>{
 
 
 
+router.post("/chngQuantitiy",async (req, res, next) => {
+  userhelper.chngQuantitiy(req.body).then(async(removeproduct) => {
+    response.total = await userhelper.getTotal(req.body.user);
+    console.log(req.body.user);
+    res.json(removeproduct);
 
+  });
+});
+
+router.get('/place-order',verifylogin,async(req,res,next)=>{
+  let total=await userhelper.getTotal(req.session.user._id)
+  res.render('user/placeorder',{total})
+})
 
 
 

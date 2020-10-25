@@ -9,6 +9,7 @@
                 <tr>
                     <th scope="col">Item</th>
                     <th scope="col">Title </th>
+                    <th scope="col">Price </th>
                     <th scope="col">Quantity</th>
 
                 </tr>    
@@ -16,14 +17,27 @@
             <tbody> 
                 {{#each products}}
                 <tr>
-{{#each this.product}}
 
-                    <td><img src="/product-images/{{this._id}}.jpg" width="70px" height="70px" alt="" srcset=""></td>
-                    <td>{{this.name}}</td>
-                    {{/each}}
+
+                    <td><img src="/product-images/{{this.product._id}}.jpg" width="70px" height="70px" alt="" srcset=""></td>
+                    <td>{{this.product.name}}</td>
+<td>{{this.product.price}}</td>
                     <td>
-                        <button class="cart-item-count mr-3">-</button>{{this.quantity}}
-                        <button class="cart-item-count mr-3">+</button>
+
+                        <button onclick="chngQuantitiy('{{this._id}}','{{this.product._id}}',-1,'{{../user}}')"class="cart-item-count mr-3">-</button>
+
+  
+                        <span id="{{this.product._id}}">{{this.quantity}}</span>
+
+
+                        <button onclick="chngQuantitiy('{{this._id}}','{{this.product._id}}',1,'{{../user}}')" class="cart-item-count mr-3">+</button>
+
+
+
+    
+
+                       
+                        
                     </td>
                     <td>
                         <a href="" class="btn btn-danger">Remove</a>
@@ -32,6 +46,49 @@
                 {{/each}}
             </tbody>
         </table>
-        
+        <h4 class="mt-5 larger">
+             <hr class="my-4" style="">
+             <style>
+                 hr {
+  border: .1px solid black;
+}
+             </style>
+            <h3 class="float-right mt-5 btn btn-primary">Total : INR <span id="11">{{total}}</span> </h3>
+        </h4>
+        <a href="/place-order" class="btn btn-success mt-5 float-left">Place Order</a>
     </div>
 </section>
+
+
+
+<script>
+    function chngQuantitiy(cartId,proId,count,userId){
+        console.log(userId)
+        let quantity=parseInt(document.getElementById(proId).innerHTML)
+        count=parseInt(count)
+        $.ajax({
+            url:'/chngQuantitiy',
+            data:{
+                cart:cartId,
+                product:proId,
+                count:count,
+                quantity:quantity,
+                user:userId
+
+            },
+            method:'post',
+            success:(response)=>{
+                console.log('hi s')
+                if(response.removeproduct){
+                    alert('product removed')
+                    location.reload()
+                }else{
+                    document.getElementById(proId).innerHTML=quantity+count
+                    document.getElementById('11').innerHTML=response.total
+                    
+
+                }
+            }
+        })
+    }
+</script>
