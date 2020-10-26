@@ -106,17 +106,16 @@ module.exports = {
   },
   removecart: (proId, userId) => {
     return new Promise(async (resolve, reject) => {
-
-
       db.get()
         .collection(collection.cart_collection)
         .update(
           { user: objectId(userId) },
-          { $pull: { products: { item:objectId(proId) } } },
+          { $pull: { products: { item: objectId(proId) } } },
           { multi: true }
-        ).then((response)=>{
-          resolve(response)
-        })
+        )
+        .then((response) => {
+          resolve(response);
+        });
     });
   },
 
@@ -254,7 +253,7 @@ module.exports = {
           },
         ])
         .toArray();
-        
+
       console.log("jjjjjjjjjjjjjjjjjjjjjjjjjjj");
       console.log(total[0].total);
       resolve(total[0].total);
@@ -298,6 +297,16 @@ module.exports = {
       resolve(cart.products[0]);
       console.log(cart.products[0]);
       console.log("dggggggggggggggggggggggggggf");
+    });
+  },
+  getOrders: (userId) => {
+    return new Promise(async (resolve, reject) => {
+      let products = await db
+        .get()
+        .collection(collection.order_collection)
+        .find({ userdetails: objectId(userId) })
+        .toArray();
+      resolve(products);
     });
   },
 };

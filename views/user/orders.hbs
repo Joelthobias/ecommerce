@@ -1,0 +1,52 @@
+{{!-- <h2 class="text-center">your cart is empty</h2> --}}
+
+
+<section  style="margin-top:  ;">
+               {{#if data}}
+
+    <div class="container">
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <th scope="col">date</th>
+                    <th scope="col">Order Id </th>
+                    <th scope="col">Payment Method </th>
+                    <th scope="col">Total Amount</th>
+                    <th scope="col">Order Status</th>
+                    <th scope="col">Adress</th>
+
+
+
+                </tr>    
+            </thead>
+                {{#each data}}
+
+            <tbody> 
+                <tr>
+                    <td>{{this._id}}</td>
+                    <td>id{{this._id}}</td>
+                    <td>{{this.paymentmethod}}</td>
+                    <td>{{this.totalAmount}}</td>
+                    <td>{{this.status}}</td>
+                    <td>{{this.Deliveryaddress.mobile}}</td>
+                    <td>{{this.date}}</td>
+
+
+
+                </tr>
+            </tbody>
+                {{/each}}
+
+        </table>
+        <h4 class="mt-5 larger">
+             <hr class="my-4" style="">
+             <style>
+                 hr {
+  border: .1px solid black;
+}
+             </style>
+                </div>
+    {{else}}
+    <h3 align="center">There is no Orders Yet</h3>
+    {{/if}}
+</section>

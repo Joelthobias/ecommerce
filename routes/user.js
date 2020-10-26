@@ -66,6 +66,7 @@ router.get("/signin", function (req, res, next) {
 
 router.post("/signin", function (req, res, next) {
   userhelper.doSignup(req.body).then((response) => {
+    res.redirect('/login')
     //console.log(response);
   });
 });
@@ -109,7 +110,7 @@ if(products!=0){
 }
 
 
- // console.log(products);
+  console.log(products);
 })
 
 
@@ -160,7 +161,14 @@ router.post('/place-order',async(req,res)=>{
 })
 
 
+router.get('/orders',verifylogin,(req,res)=>{
+  userhelper.getOrders(req.session.user._id).then((orders) => {
+    console.log(orders);
+    let data=orders
+      res.render("user/orders", { data,orders, user: req.session.user});
 
+  });
+})
 
 
  
