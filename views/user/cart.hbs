@@ -1,7 +1,8 @@
 {{!-- <h2 class="text-center">your cart is empty</h2> --}}
 
 
-<section>
+<section  style="margin-top: 150px ;">
+               {{#if products}}
 
     <div class="container">
         <table class="table mt-5">
@@ -24,13 +25,13 @@
 <td>{{this.product.price}}</td>
                     <td>
 
-                        <button onclick="chngQuantitiy('{{this._id}}','{{this.product._id}}',-1,'{{../user}}')"class="cart-item-count mr-3">-</button>
+                        <button onclick="chngQuantitiy('{{this._id}}','{{this.product._id}}',-1,'{{../uses}}')"class="cart-item-count mr-3">-</button>
 
   
                         <span id="{{this.product._id}}">{{this.quantity}}</span>
 
 
-                        <button onclick="chngQuantitiy('{{this._id}}','{{this.product._id}}',1,'{{../user}}')" class="cart-item-count mr-3">+</button>
+                        <button onclick="chngQuantitiy('{{this._id}}','{{this.product._id}}',1,'{{../uses}}')" class="cart-item-count mr-3">+</button>
 
 
 
@@ -40,7 +41,7 @@
                         
                     </td>
                     <td>
-                        <a href="" class="btn btn-danger">Remove</a>
+                        <a href="/remove-product/{{this.product._id}}" class="btn btn-danger">Remove</a>
                     </td>
                 </tr>
                 {{/each}}
@@ -57,7 +58,11 @@
         </h4>
         <a href="/place-order" class="btn btn-success mt-5 float-left">Place Order</a>
     </div>
+    {{else}}
+    <h3 align="center">your cart is empty</h3>
+    {{/if}}
 </section>
+
 
 
 
@@ -83,12 +88,19 @@
                     alert('product removed')
                     location.reload()
                 }else{
-                    document.getElementById(proId).innerHTML=quantity+count
+                    var k=quantity+count
+                    if(k<=0){
+                        location.reload()
+                    }else{
+document.getElementById(proId).innerHTML=k
                     document.getElementById('11').innerHTML=response.total
-                    
+       
+                    }
 
+                     
                 }
             }
         })
     }
+    
 </script>

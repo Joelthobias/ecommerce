@@ -84,15 +84,32 @@ router.get("/logout", (req, res) => {
 
 
 router.get('/cart',verifylogin,async (req,res)=>{
-  let total = await userhelper.getTotal(req.session.user._id);
  
 
 let products = await userhelper.getCartProducts(req.session.user._id);
-
+if(products!=0){
+  let total = await userhelper.getTotal(req.session.user._id);
   products.quantitiy = parseInt(products.quantitiy);
 
-  res.render("user/cart", { products, user: req.session.user._id ,total});
-  console.log(products);
+  res.render("user/cart", {
+    products,
+    user: req.session.user,
+    uses: req.session.user._id,
+    total,
+  });
+}else{
+  products.quantitiy = parseInt(products.quantitiy);
+
+  res.render("user/cart", {
+    products,
+    user: req.session.user
+    
+    
+  });
+}
+
+
+ // console.log(products);
 })
 
 
@@ -103,23 +120,43 @@ router.get('/add-to-cart/:id',(req,res)=>{
   })
 })
 
+router.get("/remove-product/:id", (req, res) => {
+  userhelper
+    .removecart(req.params.id, req.session.user._id)
+    .then((response) => {
+      console.log('item deleted from cart');
+      res.redirect('/cart')
+    });
+});
 
 
 
-
-router.post("/chngQuantitiy",(req, res,next) => {
-
+router.post("/chngQuantitiy", (req, res, next) => {
   userhelper.chngQuantitiy(req.body).then(async (response) => {
-    response.total = await userhelper.getTotal(req.body.user);
-    
-    res.json(response);
+    let products = await userhelper.getCartProducts(req.session.user._id);
+    if (products != 0) {
+      response.total = await userhelper.getTotal(req.body.user);
 
+      res.json(response);
+    } else {
+      res.redirect("/cart");
+      console.log('empt                           cccccccccccccccccccccccccccccccccccccarttttttttttttttttt');
+    }
   });
 });
 
 router.get('/place-order',verifylogin,async(req,res,next)=>{
   let total=await userhelper.getTotal(req.session.user._id)
-  res.render('user/placeorder',{total})
+  res.render('user/placeorder',{total,user:req.session.user})
+})
+
+router.post('/place-order',async(req,res)=>{
+  console.log(req.body);
+  let products = await userhelper.getcartprolist(req.body.userId);
+  let total = await userhelper.getTotal(req.body.userId);
+  userhelper.placeorder(req.body,products,total).then((response)=>{
+    res.json({status:true})
+  })
 })
 
 
