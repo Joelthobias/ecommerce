@@ -46,7 +46,7 @@
             method:'post',
             data:$('#checkout-form').serialize(),
             success:(response)=>{
-                alert('Redirecting to the payment page')
+                alert('Your Begin Redirected To the Payment Page')
                 if(response.CODSucess){
                 location.href='/order-sucess'
                 }else{
