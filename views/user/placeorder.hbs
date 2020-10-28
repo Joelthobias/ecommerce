@@ -46,7 +46,7 @@
             method:'post',
             data:$('#checkout-form').serialize(),
             success:(response)=>{
-                alert(response)
+                alert('Redirecting to the payment page')
                 if(response.CODSucess){
                 location.href='/order-sucess'
                 }else{
@@ -68,9 +68,7 @@
     "image": "https://example.com/your_logo",
     "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
     "handler": function (response){
-        alert(response.razorpay_payment_id);
-        alert(response.razorpay_order_id);
-        alert(response.razorpay_signature)
+        
         verifyPayment(response,order)
     },
     "prefill": {
@@ -89,14 +87,22 @@ var rzp1 = new Razorpay(options);
  rzp1.open();
     }
     function verifyPayment(payment,order){
-        //console.log(payment,order)
+        console.log(payment,order)
         $.ajax({
             url:'/verifyPayment',
             data:{
                 payment,
                 order
             },
-            method:'post'
+            method:'post',
+            success:(response)=>{
+                if(response.status){
+                location.href='/order-sucess'
+
+                }else{
+                    alert('Payment Failed')
+                }
+            }
         })
     }
 </script>

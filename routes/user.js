@@ -161,6 +161,7 @@ router.post('/place-order',async(req,res)=>{
     }else{
       //at here response is orderId
       userhelper.generateRazopay(response, total).then((response) => {
+        response.user=req.session.user
         res.json(response)
       });
     }
@@ -187,9 +188,17 @@ router.get("/order-sucess", (req, res) => {
 
  
 
-router.post("/verifyPayment"),(req,res)=>{
+router.post("/verifyPayment",(req,res)=>{
   console.log(req.body);
-};
+  userhelper.verifyPayment(req.body).then(()=>{
+    userhelper.changepaymentStatus(req.body['order[receipt]']).then(()=>{
+      res.json({status:true})
+    }).catch((err)=>{
+      console.log(err);
+      res.json({status:false})
+    })
+  })
+});
 
 
 module.exports = router;
