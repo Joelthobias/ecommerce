@@ -1,52 +1,51 @@
-{{!-- <h2 class="text-center">your cart is empty</h2> --}}
+<section>
+        <div class="container">
+
+                <div class="row mt-3 container">
+                                       </div>
+                <table class="table  mt-4">
+
+                        <thead>
+                            {{#if orders}}
+                                <tr>
+                                        <th scope="col">Date</th>
+                                        <th scope="">Address</th>
+                                        <th scope="">Pincode</th>
+                                        <th scope="">Mobile</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">payment Method</th>
+
+                                        <th>status </th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                                {{#each orders}}
+                                        <tr>
+                                                
+                                                <td>{{this.date}} </td>
+                                                {{!-- <td>{{this.price}} </td> --}}
+                                                <td>{{this.Deliveryaddress.addres}}</td>
+                                                <td>{{this.Deliveryaddress.pincode}}</td>
+                                                <td>{{this.Deliveryaddress.mobile}}</td>
+                                                <td>{{this.totalAmount}} </td>
+                                                <td>{{this.paymentmethod}} </td>
+                                                <td>{{this.status}} </td>
+                                                
 
 
-<section  style="margin-top:  ;">
-               {{#if data}}
-
-    <div class="container">
-        <table class="table mt-5">
-            <thead>
-                <tr>
-                    <th scope="col">date</th>
-                    <th scope="col">Order Id </th>
-                    <th scope="col">Payment Method </th>
-                    <th scope="col">Total Amount</th>
-                    <th scope="col">Order Status</th>
-                    <th scope="col">Adress</th>
-
-
-
-                </tr>    
-            </thead>
-                {{#each data}}
-
-            <tbody> 
-                <tr>
-                    <td>{{this._id}}</td>
-                    <td>id{{this._id}}</td>
-                    <td>{{this.paymentmethod}}</td>
-                    <td>{{this.totalAmount}}</td>
-                    <td>{{this.status}}</td>
-                    <td>{{this.Deliveryaddress.mobile}}</td>
-                    <td>{{this.date}}</td>
-
-
-
-                </tr>
-            </tbody>
-                {{/each}}
-
-        </table>
-        <h4 class="mt-5 larger">
-             <hr class="my-4" style="">
-             <style>
-                 hr {
-  border: .1px solid black;
-}
-             </style>
-                </div>
-    {{else}}
-    <h3 align="center">There is no Orders Yet</h3>
-    {{/if}}
+                                                <td>
+                                                        <a href="/view-order-product/{{this._id}}" class="btn btn-primary">View Products</a> 
+                                                        
+                                                        
+                                                </td> 
+                                               
+                                        </tr>
+                                {{/each}}
+                                {{else}}
+                                <h1>No ordersv yet</h1>
+                                {{/if}}
+                                {{!-- {{this._id}} --}}
+                        </tbody>
+                </table>
+        </div>
 </section>

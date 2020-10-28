@@ -155,25 +155,41 @@ router.post('/place-order',async(req,res)=>{
   console.log(req.body);
   let products = await userhelper.getcartprolist(req.body.userId);
   let total = await userhelper.getTotal(req.body.userId);
-  userhelper.placeorder(req.body,products,total).then((response)=>{
-    res.json({status:true})
-  })
-})
-
-
-router.get('/orders',verifylogin,(req,res)=>{
-  userhelper.getOrders(req.session.user._id).then((orders) => {
-    console.log(orders);
-    let data=orders
-      res.render("user/orders", { data,orders, user: req.session.user});
-
+  userhelper.placeorder(req.body, products, total).then((response) => {
+    if (req.body["payment-method"]=='COD'){
+      res.json({ CODSucess: true })
+    }else{
+      //at here response is orderId
+      userhelper.generateRazopay(response, total).then((response) => {
+        res.json(response)
+      });
+    }
   });
 })
 
 
+router.get('/orders',verifylogin,async(req,res)=>{
+  let orders= await userhelper.getuserorders(req.session.user._id)
+  //console.log(orders);
+  res.render('user/orders',{user:req.session.user,orders})
+})
+
+router.get("/view-order-product/:id", verifylogin, async(req, res) => {
+    let products = await userhelper.getorderdproducts(req.params.id);
+
+  console.log(products);
+  res.render("user/view-order-product", { products,user:req.session.user });
+});
+
+router.get("/order-sucess", (req, res) => {
+  res.render("user/order-s", { user: req.session.user });
+});
+
  
 
-
+router.post("/verifyPayment"),(req,res)=>{
+  console.log(req.body);
+};
 
 
 module.exports = router;
