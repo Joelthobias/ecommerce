@@ -7,6 +7,6 @@ the avilable ports are
 port 8000
 ports
 /
-/admin
-/admin/add-product
+/min
+/min/add-product
 thanks to  crossroads and @nikhilkilivayil sir

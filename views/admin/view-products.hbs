@@ -3,18 +3,21 @@
 
                 <div class="row mt-3 container">
                         <h1 class="mx-auto"> <b> View-products </b> </h1>
-                        <a class="btn btn-success m-3 ml-auto" href="/admin/add-product">Add product</a>
+                        <a class="btn btn-success m-3 ml-auto" href="/min/add-product">Add product</a>
                 </div>
-                <table class="table  mt-4">
+                <table id="table_id" class="table  mt-4">
 
                         <thead>
                                 <tr>
                                         <th scope="col">No</th>
                                         <th scope="col">Name</th>
+                                        <th scope="col">Price</th>
+
                                         <th scope="col">Catagory</th>
                                         <th scope="col">Description</th>
                                         <th scope="col">Image</th>
-                                        <th> </th>
+
+                                        <th scope="col"> Options</th>
                                 </tr>
                         </thead>
                         <tbody>
@@ -28,8 +31,8 @@
 
                                                 <td><img src="/product-images/{{this._id}}.jpg" height="100px" srcset=""> </td>
                                                 <td>
-                                                        <a href="/admin/edit-product/{{this._id}}" class="btn btn-primary">Edit</a> 
-                                                        <a href="/admin/delete-product/{{this._id}}" onclick="return confirm('are you sure')" class="btn btn-danger">Delete</a>
+                                                        <a href="/min/edit-product/{{this._id}}" class="btn btn-primary">Edit</a> 
+                                                        <a href="/min/delete-product/{{this._id}}" onclick="return confirm('are you sure')" class="btn btn-danger">Delete</a>
                                                         
                                                 </td>
                                                
@@ -40,3 +43,8 @@
                 </table>
         </div>
 </section>
+<script>
+        $(document).ready( function () {
+    $('#table_id').DataTable();
+} );
+</script>

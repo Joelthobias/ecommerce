@@ -5,13 +5,15 @@
                {{#if products}}
 
     <div class="container">
-        <table class="table mt-5">
+        <table id="table_id" class="table mt-5">
             <thead>
                 <tr>
                     <th scope="col">Item</th>
                     <th scope="col">Title </th>
                     <th scope="col">Price </th>
                     <th scope="col">Quantity</th>
+                    <th scope="col">option</th>
+
 
                 </tr>    
             </thead>
@@ -103,4 +105,9 @@ document.getElementById(proId).innerHTML=k
         })
     }
     
+</script>
+<script>
+        $(document).ready( function () {
+    $('#table_id').DataTable();
+} );
 </script>

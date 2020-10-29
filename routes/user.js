@@ -6,10 +6,10 @@ var productHelper = require("../helpers/product-helper");
 const userhelper = require("../helpers/user-helper");
 
 const verifylogin=(req,res,next)=>{
-  if(req.session.loggedIn){
-    next()
-  }else{
-    res.redirect('/login')
+  if (req.session.userloggedIn) {
+    next();
+  } else {
+    res.redirect("/login");
   }
 }
 
@@ -39,22 +39,23 @@ router.get("/",async function (req, res, next) {
 
 
 router.get("/login", function (req, res, next) {
-  if (req.session.loggedIn) {
+  if (req.session.userloggedIn) {
     res.redirect("/");
   } else {
-    res.render("user/login", { "loginErr":req.session.loginErr });
-    req.session.loginErr=false
+    res.render("user/login", { 'userloginErr':req.session.userloginErr });
+    req.session.userloginErr=false
   }
 });
 
 router.post("/login", function (req, res, next) {
   userhelper.doLogin(req.body).then((response) => {
     if (response.status) {
-      req.session.loggedIn = true;
       req.session.user = response.user;
+      req.session.userloggedIn = true;
+
       res.redirect("/");
     } else {
-      req.session.loginErr="Invalid User Name Or Password"
+      req.session.userloginErr="Invalid User Name Or Password"
       res.redirect("/login");
     }
   });
@@ -66,13 +67,16 @@ router.get("/signin", function (req, res, next) {
 
 router.post("/signin", function (req, res, next) {
   userhelper.doSignup(req.body).then((response) => {
-    res.redirect('/login')
+          req.session.user = response;
+          req.session.user.loggedIn = true;
+    res.redirect('/')
     //console.log(response);
   });
 });
 
 router.get("/logout", (req, res) => {
-  req.session.destroy();
+  req.session.user=null
+  req.session.userloggedIn=false
   res.redirect("/");
 });
 
@@ -91,7 +95,7 @@ let products = await userhelper.getCartProducts(req.session.user._id);
 if(products!=0){
   let total = await userhelper.getTotal(req.session.user._id);
   products.quantitiy = parseInt(products.quantitiy);
-
+products.price = parseInt(products.price)
   res.render("user/cart", {
     products,
     user: req.session.user,
