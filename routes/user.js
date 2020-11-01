@@ -28,11 +28,25 @@ router.get("/",async function (req, res, next) {
 
   productHelper.getAllProducts().then((products) => {
     //console.log(products);
+    if(user){
     res.render("user/view-products", {products, user,cartcount });
+
+    }else{
+      let user={
+        name:'Guest',
+        id:000
+      }
+    res.render("user/view-products", { products, user, cartcount });
+
+    }
   });
 });
 
-
+router.get('/view-product/:id',(req,res)=>{
+userhelper.viewpro(req.params.id).then((product) => {
+  res.render('user/view',{user:req.session.user,product})
+});
+})
 
 //login and signin part starts here
 
@@ -93,6 +107,7 @@ router.get('/cart',verifylogin,async (req,res)=>{
 
 let products = await userhelper.getCartProducts(req.session.user._id);
 if(products!=0){
+  
   let total = await userhelper.getTotal(req.session.user._id);
   products.quantitiy = parseInt(products.quantitiy);
 products.price = parseInt(products.price)

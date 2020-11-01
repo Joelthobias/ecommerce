@@ -60,8 +60,8 @@ router.get("/add-product",verifyadmlogin, (req, res) => {
 router.post("/add-product", (req, res) => {
   // console.log(req.body)
   // console.log(req.files.image)
-
-  productHelper.addproduct(req.body, (id) => {
+let price= parseInt(req.body.price);
+  productHelper.addproduct(req.body,price ,(id) => {
     let image = req.files.image;
     console.log(id);
     image.mv("./public/product-images/" + id + ".jpg", (err, done) => {

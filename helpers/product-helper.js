@@ -3,12 +3,12 @@ var collection = require("../config/collections");
 var objectId = require("mongodb").ObjectID;
 
 module.exports = {
-  addproduct: (product, callback) => {
+  addproduct: (product,price, callback) => {
     // console.log(product);
 product.price = parseInt(product.price);
     db.get()
       .collection("product")
-      .insertOne(product)
+      .insert(product,price)
       .then((data) => {
         callback(data.ops[0]._id);
       });
@@ -49,6 +49,7 @@ product.price = parseInt(product.price);
     });
   },
   updateProduct: (proid, pro) => {
+    let price=parseInt(pro.price)
     return new Promise((resolve, reject) => {
       db.get()
         .collection(collection.PRODUCT_COLLECTION)
@@ -58,7 +59,7 @@ product.price = parseInt(product.price);
             $set: {
               name: pro.name,
               description: pro.description,
-              price: pro.price,
+              price: price,
               catagory: pro.catagory,
             },
           }

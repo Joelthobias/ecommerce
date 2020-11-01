@@ -1,5 +1,10 @@
 <header class="sticky-top">
 
+<script>
+function () {
+$('.offcanvas-collapse').toggleClass('close')
+}
+</script>
 {{#if admin}}
         <nav class="navbar fixed-top navbar-light bg-light">
                 <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
@@ -44,7 +49,7 @@
                                 <li class="nav-item active mt-3 mt-lg-0">
                                         <a class="nav-link" href="#">All users<span class="sr-only">(current)</span></a>
                                 </li>
-                                {{!-- <hr class="hr">
+                                 <hr class="hr">
                                 <li class="nav-item active mt-3 mt-lg-0">
                                         <a class="nav-link h4 " href="#"><b>Explore</b> <span
                                                         class="sr-only">(current)</span></a>
@@ -82,7 +87,7 @@
 
                                 <li class="nav-item active mt-3 mt-lg-0">
                                         <a class="nav-link" href="#">Signout <span class="sr-only">(current)</span></a>
-                                </li> --}}
+                                </li> 
                         </ul>
                        
                 </div>
@@ -103,6 +108,3 @@
 
 </header>
 {{!-- One item in cart <img src="https://img.icons8.com/ios/50/000000/shopping-cart-with-money.png" /> --}}
-{{!-- function() {
-$('.offcanvas-collapse').toggleClass('close')
-} --}}

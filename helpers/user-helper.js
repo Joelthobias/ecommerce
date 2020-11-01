@@ -51,6 +51,14 @@ module.exports = {
       }
     });
   },
+  viewpro:(proid)=>{
+return new Promise(async(resolve,reject)=>{
+  let pro=await db.get().collection(collection.PRODUCT_COLLECTION).find({_id:objectId(proid)})
+        .toArray();
+  
+  resolve(pro)
+})
+  },
   addtocart: (proid, userid) => {
     let proObj = {
       item: objectId(proid),
@@ -250,6 +258,7 @@ module.exports = {
               price: { $arrayElemAt: ["$product.price", 0] },
             },
           },
+          
           {
             $group: {
               _id: null,

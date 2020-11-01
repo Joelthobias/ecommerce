@@ -16,167 +16,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     
-    <style>
-      html,
-      body {
-        overflow-x: hidden;
-        /* Prevent scroll on narrow devices */
-      }
-
-      body {
-        padding-top: 50px;
-      }
-
-      @media (max-width: 2000px) {
-        .offcanvas-collapse {
-          position: fixed;
-          top: 56px;
-          /* Height of navbar */
-          bottom: 0;
-          right: 100%;
-          width: 27%;
-          padding-right: 1rem;
-          padding-left: 1rem;
-          overflow-y: auto;
-          visibility: hidden;
-          font-weight: 800;
-          font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-          color: #000;
-          margin-top: -3em;
-          padding-top: 3em;
-          background-color: #f9f9f9;
-          transition: visibility .3s ease-in-out, -webkit-transform .3s ease-in-out;
-          transition: transform .3s ease-in-out, visibility .3s ease-in-out;
-          transition: transform .3s ease-in-out, visibility .3s ease-in-out, -webkit-transform .3s ease-in-out;
-        }
-
-        @media(max-width:942px) {
-          .offcanvas-collapse {
-            width: 35%;
-          }
-        }
-
-        @media(max-width:837px) {
-          .offcanvas-collapse {
-            width: 40%;
-          }
-        }
-
-        @media(max-width:754px) {
-          .offcanvas-collapse {
-            width: 46%;
-          }
-        }
-
-        @media(max-width:673px) {
-          .offcanvas-collapse {
-            width: 52%;
-          }
-        }
-
-        @media(max-width:608px) {
-          .offcanvas-collapse {
-            width: 57%;
-          }
-        }
-
-        @media(max-width:575px) {
-          .offcanvas-collapse {
-            width: 80%;
-          }
-        }
-
-        .offcanvas-collapse.open {
-          visibility: visible;
-          -webkit-transform: translateX(100%);
-          transform: translateX(100%);
-        }
-      }
-
-      .nav-scroller {
-        position: relative;
-        z-index: 2;
-        height: 2.75rem;
-        overflow-y: hidden;
-      }
-
-      .nav-scroller .nav {
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-        padding-bottom: 1rem;
-        margin-top: -1px;
-        overflow-x: auto;
-        color: rgba(255, 255, 255, .75);
-        text-align: center;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .nav-underline .nav-link {
-        padding-top: .75rem;
-        padding-bottom: .75rem;
-        font-size: .875rem;
-        color: #6c757d;
-      }
-
-      .nav-underline .nav-link:hover {
-        color: #007bff;
-      }
-
-      .nav-underline .active {
-        font-weight: 500;
-        color: #343a40;
-      }
-
-      .text-white-50 {
-        color: rgba(255, 255, 255, .5);
-      }
-
-      .bg-purple {
-        background-color: #6f42c1;
-      }
-
-      .lh-100 {
-        line-height: 1;
-      }
-
-      .lh-125 {
-        line-height: 1.25;
-      }
-
-      .lh-150 {
-        line-height: 1.5;
-      }
-
-
-
-       
-
-      .hr {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        border: 1;
-        border-top: 1px solid #00000059;
-        width: 100%;
-        background-color: #00000059;
-        margin-left: -15px;
-        height: 3px;
-        padding-right: 19px;
-      }
-      .r {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        border: 1;
-        border-top: 1px solid #00000059;
-        width: 100%;
-        background-color: #00000059;
-        margin-left: -15px;
-        height: -3em;
-        padding-right: 19px;
-      }
-    </style>
+    <link rel="stylesheet" href="/stylesheets/style.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
   
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
@@ -184,9 +24,21 @@
 
   <body>
     {{#if admin}}
-      {{>admin-header}}
-    {{else}}
-      {{>user-header}}
+
+           {{>admin-header}}
+
+    {{else }}
+
+            {{#if user}}
+
+                {{>user-header}}
+
+            {{else}}
+            {{#if user}}
+                        {{>user-header}}
+              {{else}}
+            {{/if}}
+      {{/if}}
     {{/if}}
 
 
