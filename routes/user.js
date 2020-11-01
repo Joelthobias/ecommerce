@@ -42,9 +42,14 @@ router.get("/",async function (req, res, next) {
   });
 });
 
-router.get('/view-product/:id',(req,res)=>{
+router.get('/view-product/:id',async(req,res)=>{
+  let cartcount='0'
+  if(req.session.user){
+    cartcount=await userhelper.getcartcount(req.session.user._id)
+
+  }
 userhelper.viewpro(req.params.id).then((product) => {
-  res.render('user/view',{user:req.session.user,product})
+  res.render("user/view", { user: req.session.user, product,cartcount});
 });
 })
 

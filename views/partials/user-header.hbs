@@ -1,55 +1,57 @@
-<header>
-<nav class=" navbar stickey-top navbar-expand-lg navbar-dark bg-primary" style="background-color: #007bffde !important" >
-  <style>
-    .bg-primary{
-      background-color:#2874f0 !important;
-      height: 56px;
+<heade> <nav class=" navbar stickey-top navbar-expand-lg navbar-dark bg-primary" style="background-color: #007bffde !important; height : 56px;">
 
-    }
-  </style>
-  <a class="navbar-brand " href="/">SHOPPING CART</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<style>
+  .bg-primary{
+    background-color : #2874f0 !important;
+    
 
-  <div class="collapse navbar-collapse " id="navbarTogglerDemo02">
-    <ul class="navbar-nav mr-auto  mt-lg-0">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Products <span class="sr-only">(current)</span></a>
-      </li>
-      
-      {{#if user}}
-      <li class="nav-item">
-        <a class="nav-link " href="/orders">Orders</a>
-      </li>
-      {{/if}}
+}
+
+</style>
+<a class="navbar-brand " href="/">
+    SHOPPING CART </a>
+  <button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span >
+</button>
+
+<div class="collapse navbar-collapse " id="navbarTogglerDemo02">
+    <ul class="navbar-nav ml-auto  mt-lg-0">
+        <li class="nav-item active">
+            <a class="nav-link" href="#">Products
+                <span class="sr-only">(current)</span>
+            </a>
+        </li>
+
+
     </ul>
-                   <div class="btn-group">
-  <button type="button" class="btn btn-danger dropdown-toggle mx-3 pr-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    {{#if user}}
-    {{user.name}}
-    {{else}}
-Account
-    {{/if}}
-    
-  </button>
-  <div class="dropdown-menu">
-        {{#if user}}
-                <a class="dropdown-item" href="/logout">Logout</a>
-                {{else}}
-        <a class="dropdown-item" href="/login">Login</a>
-        {{/if}}
-    
-    
-  </div>
+    <div class="btn-group">
+        <a type="" class="text-white dropdown-toggle mx-3 pr-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+            {{#if user}}
+        {{user.name}}
+        {{else}}
+            Account {{/if}}
+                    
+                  </a>
+                  <div class="dropdown-menu">
+                        {{#if user}}
+                                <a class="dropdown-item" href="">My profile</a>
+                                <a class="dropdown-item" href="/orders">orders</a>
+                
+                                <a class="dropdown-item" href="/logout">Logout</a>
+                                {{else}}
+                        <a class="dropdown-item" href="/login">Login</a>
+                        {{/if}}
+                    
+                    
+                  </div>
+                
+                     
+                </div>
+                  </div>
+                        <a class="nav-link" href="/cart"><h5 > <img class="mr-n4  " src="https://img.icons8.com/pastel-glyph/40/ffffff/shopping-cart--v2.png"/> <span class = " ml-n4 mt-n2  pl-n3 badge badge-success ml-auto" id = "cart-count" > {{cartcount}} </span></h5 >
+        </a>
 
-     
-</div>
-  </div>
-        <a class="nav-link" href="/cart"><h5> <img class="mr-n4  " src="https://img.icons8.com/pastel-glyph/50/ffffff/shopping-cart--v2.png"/> <span class=" ml-n4 mt-n2  pl-n3 badge badge-success" id="cart-count">{{cartcount}}</span></h5></a>
-  
-</nav>
-
+    </nav>
 
 
 </header>
