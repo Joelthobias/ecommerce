@@ -4,9 +4,12 @@ node.js , express ,Mongodb and handlebars
 it runs on port 8000 
 =======
 the avilable ports are
-port 8000
+
+
 ports
+
 /
+
 /min
-/min/add-product
+
 thanks to  crossroads and @nikhilkilivayil sir
