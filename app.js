@@ -11,6 +11,7 @@ var fileupload=require('express-fileupload')
 var app = express();
 var db=require('./config/connection')
 var session=require('express-session');
+
 const { DESTRUCTION } = require('dns');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

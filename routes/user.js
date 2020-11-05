@@ -5,6 +5,7 @@ var router = express.Router();
 var productHelper = require("../helpers/product-helper");
 const userhelper = require("../helpers/user-helper");
 
+
 const verifylogin=(req,res,next)=>{
   if (req.session.userloggedIn) {
     next();
@@ -17,10 +18,10 @@ const verifylogin=(req,res,next)=>{
 /* GET home page. */
 router.get("/",async function (req, res, next) {
   let cartcount=null
-  let user = req.session.user;
- // console.log(user);
+
 
   if(req.session.user){
+    user=req.session.user
     cartcount=await userhelper.getcartcount(req.session.user._id)
 
   }
@@ -107,7 +108,7 @@ router.get("/logout", (req, res) => {
 
 
 
-router.get('/cart',async (req,res)=>{
+router.get('/cart',verifylogin,async (req,res)=>{
  
 
 let products = await userhelper.getCartProducts(req.session.user._id);
