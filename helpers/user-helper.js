@@ -274,9 +274,10 @@ return new Promise(async(resolve,reject)=>{
     });
   },
 
+
   placeorder: (order, products, total) => {
     return new Promise((resolve, reject) => {
-      console.log(order, products, total);
+      console.log(products);
       let status = order["payment-method"] === "COD" ? "placed" : "Pending";
       let OrderObj = {
         Deliveryaddress: {
@@ -417,4 +418,10 @@ return new Promise(async(resolve,reject)=>{
         });
     });
   },
+  getprice:(proid)=>{
+    return new Promise(async(resolve,reject)=>{
+      let price=await db.get().collection(collection.PRODUCT_COLLECTION).find({_id:objectId(proid)}).toArray()
+      resolve(price)
+    })
+  }
 };

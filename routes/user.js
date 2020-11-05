@@ -107,7 +107,7 @@ router.get("/logout", (req, res) => {
 
 
 
-router.get('/cart',verifylogin,async (req,res)=>{
+router.get('/cart',async (req,res)=>{
  
 
 let products = await userhelper.getCartProducts(req.session.user._id);
@@ -138,7 +138,7 @@ products.price = parseInt(products.price)
 })
 
 
-router.get('/add-to-cart/:id',(req,res)=>{
+router.get('/add-to-cart/:id',verifylogin,(req,res)=>{
   console.log("'api call '");
   userhelper.addtocart(req.params.id,req.session.user._id).then(()=>{
     res.json({status:true})
@@ -175,9 +175,22 @@ router.get('/place-order',verifylogin,async(req,res,next)=>{
   res.render('user/placeorder',{total,user:req.session.user})
 })
 
-router.post('/place-order',async(req,res)=>{
+router.get('/placeoneorder/:id',verifylogin,async(req,res)=>{
+  userhelper.addtocart(req.params.id,req.session.user._id).then(()=>{
+   
+  })
+
+  let product=await userhelper.getprice(req.params.id)
+    let products=product
+    let total=product[0].price
+
+  res.render('user/placeOneorder',{products,total,user:req.session.user})
+})
+
+router.post('/place-One-order',async(req,res)=>{
   console.log(req.body);
-  let products = await userhelper.getcartprolist(req.body.userId);
+  let products=null
+  products = await userhelper.getcartprolist(req.body.userId);
   let total = await userhelper.getTotal(req.body.userId);
   userhelper.placeorder(req.body, products, total).then((response) => {
     if (req.body["payment-method"]=='COD'){
@@ -191,6 +204,26 @@ router.post('/place-order',async(req,res)=>{
     }
   });
 })
+
+
+router.post('/place-order',async(req,res)=>{
+  console.log(req.body);
+  let products=null
+  products = await userhelper.getcartprolist(req.body.userId);
+  let total = await userhelper.getTotal(req.body.userId);
+  userhelper.placeorder(req.body, products, total).then((response) => {
+    if (req.body["payment-method"]=='COD'){
+      res.json({ CODSucess: true })
+    }else{
+      //at here response is orderId
+      userhelper.generateRazopay(response, total).then((response) => {
+        response.user=req.session.user
+        res.json(response)
+      });
+    }
+  });
+})
+
 
 
 router.get('/orders',verifylogin,async(req,res)=>{
@@ -223,6 +256,7 @@ router.post("/verifyPayment",(req,res)=>{
     })
   })
 });
+
 
 
 module.exports = router;

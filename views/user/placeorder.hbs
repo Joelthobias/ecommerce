@@ -46,10 +46,12 @@
             method:'post',
             data:$('#checkout-form').serialize(),
             success:(response)=>{
-                alert('Your Begin Redirected To the Payment Page')
                 if(response.CODSucess){
                 location.href='/order-sucess'
                 }else{
+alert('Your Begin Redirected To the Payment Page')
+
+
                     razopayPayment(response)
                 }
                 
