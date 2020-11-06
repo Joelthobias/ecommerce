@@ -19,7 +19,7 @@ const verifylogin=(req,res,next)=>{
 router.get("/",async function (req, res, next) {
   let cartcount=null
 
-
+user=req.session.user
   if(req.session.user){
     user=req.session.user
     cartcount=await userhelper.getcartcount(req.session.user._id)
@@ -33,11 +33,8 @@ router.get("/",async function (req, res, next) {
     res.render("user/view-products", {products, user,cartcount });
 
     }else{
-      let user={
-        name:'Guest',
-        id:000
-      }
-    res.render("user/view-products", { products, user, cartcount });
+      
+    res.render("user/view-products", { products, cartcount });
 
     }
   });
@@ -177,7 +174,7 @@ router.get('/place-order',verifylogin,async(req,res,next)=>{
 })
 
 router.get('/placeoneorder/:id',verifylogin,async(req,res)=>{
-  userhelper.addtocart(req.params.id,req.session.user._id).then(()=>{
+  userhelper.addtotemcart(req.params.id,req.session.user._id).then(()=>{
    
   })
 
@@ -185,15 +182,15 @@ router.get('/placeoneorder/:id',verifylogin,async(req,res)=>{
     let products=product
     let total=product[0].price
 
-  res.render('user/placeOneorder',{products,total,user:req.session.user})
+  res.render('user/placeoneorder',{products,total,user:req.session.user})
 })
 
-router.post('/place-One-order',async(req,res)=>{
+router.post('/place-one-order',async(req,res)=>{
   console.log(req.body);
   let products=null
-  products = await userhelper.getcartprolist(req.body.userId);
-  let total = await userhelper.getTotal(req.body.userId);
-  userhelper.placeorder(req.body, products, total).then((response) => {
+  products = await userhelper.gettemcartprolist(req.body.userId);
+  let total = await userhelper.gettemTotal(req.body.userId);
+  userhelper.placeoneorder(req.body, products, total).then((response) => {
     if (req.body["payment-method"]=='COD'){
       res.json({ CODSucess: true })
     }else{
@@ -229,8 +226,11 @@ router.post('/place-order',async(req,res)=>{
 
 router.get('/orders',verifylogin,async(req,res)=>{
   let orders= await userhelper.getuserorders(req.session.user._id)
-  //console.log(orders);
-  res.render('user/orders',{user:req.session.user,orders})
+  let proid=orders[0].products[0].item
+  console.log('Product Id :  ',proid);
+  let product=await userhelper.viewpro(proid)
+  
+  res.render('user/orders',{user:req.session.user,orders,product})
 })
 
 router.get("/view-order-product/:id", verifylogin, async(req, res) => {

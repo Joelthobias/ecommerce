@@ -1,51 +1,104 @@
 <section>
-        <div class="container">
+    <div class="container d-none d-md-block">
 
-                <div class="row mt-3 container">
-                                       </div>
-                <table class="table  mt-4">
+        <div class="row mt-3 container">
+            <table class="table  mt-4">
 
-                        <thead>
-                            {{#if orders}}
-                                <tr>
-                                        <th scope="col">Date</th>
-                                        <th scope="">Address</th>
-                                        <th scope="">Pincode</th>
-                                        <th scope="">Mobile</th>
-                                        <th scope="col">Amount</th>
-                                        <th scope="col">payment Method</th>
+                <thead>
+                    {{#if orders}}
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="">Address</th>
+                            <th scope="">Pincode</th>
+                            <th scope="">Mobile</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">payment Method</th>
 
-                                        <th>status </th>
-                                </tr>
-                        </thead>
-                        <tbody>
-                                {{#each orders}}
-                                        <tr>
-                                                
-                                                <td>{{this.date}} </td>
-                                                {{!-- <td>{{this.price}} </td> --}}
-                                                <td>{{this.Deliveryaddress.addres}}</td>
-                                                <td>{{this.Deliveryaddress.pincode}}</td>
-                                                <td>{{this.Deliveryaddress.mobile}}</td>
-                                                <td>{{this.totalAmount}} </td>
-                                                <td>{{this.paymentmethod}} </td>
-                                                <td>{{this.status}} </td>
-                                                
+                            <th>status
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each orders}}
+                            <tr>
+
+                                <td>{{ this.date }}
+                                </td>
+
+                                <td>{{ this.Deliveryaddress.addres }}</td>
+                                <td>{{ this.Deliveryaddress.pincode }}</td>
+                                <td>{{ this.Deliveryaddress.mobile }}</td>
+                                <td>{{ this.totalAmount }}
+                                </td>
+                                <td>{{ this.paymentmethod }}
+                                </td>
+                                <td>{{ this.status }}
+                                </td>
 
 
-                                                <td>
-                                                        <a href="/view-order-product/{{this._id}}" class="btn btn-primary">View Products</a> 
-                                                        
-                                                        
-                                                </td> 
-                                               
-                                        </tr>
-                                {{/each}}
-                                {{else}}
-                                <h1>No ordersv yet</h1>
-                                {{/if}}
-                                {{!-- {{this._id}} --}}
-                        </tbody>
-                </table>
+                                <td>
+                                    <a href="/view-order-product/{{ this._id }}" class="btn btn-primary">View Products</a>
+
+
+                                </td>
+
+                            </tr>
+                        {{/each}}
+                    {{ else }}
+                        <h1>No orders yet</h1>
+                    {{/if}}
+
+                </tbody>
+            </table>
         </div>
-</section>
+    </div>
+<div class="d-block d-md-none ">
+<div class=" mt-5" >
+
+{{#each orders}}
+    {{#each products}}
+<hr>
+        <div class="row container px-4 py-2" >
+
+
+                    <div class="col-5">
+<img src="/product-images/{{ this.item }}.jpg " style="max-width: 34%;" class="img-fluid" alt=""></div>
+
+                    {{/each}}
+
+
+                    <div class="col-6">
+
+                        {{#each ../product}}
+
+                            <h5 style="text-transform: uppercase;">{{ this.name }}</h5>
+                        {{/each}}
+                            <h6> <b>Expected Deleviery {{this.status}}</b></h6>
+                
+                    </div>
+                    <div class="col-1" align='right'>
+                            <i class=" mt-5 ml-auto arrow right"></i>
+<style>
+    .arrow {
+        border: solid black;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 3px;
+    }
+    .right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+</style>
+
+                    </div>
+                </div>
+                <hr>
+            {{/each}}
+
+
+        </div>
+    </div>
+
+
+    </section>

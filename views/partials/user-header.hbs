@@ -1,85 +1,98 @@
-<heade>
-    <nav class=" navbar stickey-top navbar-expand-lg navbar-dark bg-primary" style="background-color: #007bffde !important; height : 56px;">
-
-        <style>
-            .bg-primary {
-                background-color: #2874f0 !important;
+<header style="background-color: #2874f0 !important;">
 
 
-            }
-        </style>
-        <a class="navbar-brand " href="/">
-            SHOPPING CART
-        </a>
-        <button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <div class="collapse navbar-collapse " id="navbarTogglerDemo02">
+    <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark" style="height: 56px;">
+        <a class="navbar-brand" href="/">SHOPPING CART</a>
 
-<input class="form-control mr-sm-2 col-6" type="text" onkeyup="mFunction()" placeholder="Search" id="myInput" >
-
-
-        
- 
-
-
-            <div class="dropdown ml-auto">
-
-
-                <a type="button" style="text-decoration: none;" class="text-white dropbtn mx-3 pr-4">
-
-
-                    {{#if user}}
-                        {{user.name}}
-                    {{else}}
-                        Account
-                    {{/if}}
-
-
-                </a>
-                <div class="dropdown-menu dropdown-content">
-
-                    {{#if user}}
-                        <a class="dropdown-item" href="">My profile</a>
-                        <a class="dropdown-item" href="/orders">orders</a>
-
-                        <a class="dropdown-item" href="/logout">Logout</a>
-                    {{else}}
-                        <a class="dropdown-item" href="/login">Login</a>
-                    {{/if}}
-
-
-                </div>
-
-
-            </div>
-            <ul class="navbar-nav ml-auto  mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Products
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-
-
-            </ul>
-
-        </div>
-        <a class="nav-link" href="/cart">
+        <a class="nav-link ml-auto d-block d-md-none" href="/cart">
             <h5>
-                <img class="mr-n4  " src="https://img.icons8.com/pastel-glyph/40/ffffff/shopping-cart--v2.png"/>
+                <img class="mr-n4  " src="https://img.icons8.com/pastel-glyph/30/ffffff/shopping-cart--v2.png"/>
                 <span class=" ml-n4 mt-n2  pl-n3 badge badge-success ml-auto" id="cart-count">
-                    {{cartcount}}
+                    {{ cartcount }}
                 </span>
             </h5>
         </a>
 
+
+        <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+            <span class="navbar-toggler-icon"></span>
+        </button> 
+
+
+
+
+        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+
+            <input class="form-control mr-sm-2 col-9 d-none d-md-block ml-md-auto" type="text" onkeyup="mFunction()" placeholder="Search" id="myInput"></li>
+
+
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <div class="dropdown ml-auto">
+
+
+                        <a type="button" style="text-decoration: none;" class="text-white dropbtn mx-3 pr-4">
+
+
+                            {{#if user}}
+                                {{ user.name }}
+                            {{ else }}
+                                <a class="dropdown-item btn-inline mb-3 bg-white" href="/login">Login</a>
+
+
+                            {{/if}}
+
+
+                        </a>
+
+                        <div class="dropdown-menu pl-2 dropdown-content ">
+
+                            {{#if user}}
+                                <a class="dropdown-item" href="">My profile</a>
+                                <a class="dropdown-item" href="/orders">orders</a>
+
+                                <a class="dropdown-item" href="/logout">Logout</a>
+                            {{ else }}
+                                <a class="dropdown-item " href="/signin">New customer
+                                    <span class="text-danger">signin</span>
+                                </a>
+
+
+                            {{/if}}
+
+                        </div>
+                        <span class="sr-only">(current)</span>
+
+
+                    </div>
+
+                </li>
+
+            </ul>
+            <input class="form-control cc mr-sm-2 col-9 d-block  d-md-none ml-md-auto" type="text" onkeyup="mFunction()" placeholder="Search" id="myInput"></li>
+
+
+            <a class="nav-link d-none d-md-block" href="/cart">
+                <h5>
+                    <img class="mr-n4  " src="https://img.icons8.com/pastel-glyph/40/ffffff/shopping-cart--v2.png"/>
+                    <span class=" ml-n4 mt-n2  pl-n3 badge badge-success ml-auto" id="cart-count">
+                        {{ cartcount }}
+                    </span>
+                </h5>
+            </a>
+
+
+        </div>
+
+
     </nav>
+<div class="bg-prmary ">
+
+    <input class="form-control cc mr-sm-2 col-9 ml-5 d-block  d-md-none ml-md-auto" type="text" onkeyup="mFunction()" placeholder="Search" id="myInput"></li>
 
 
-</header>
-{{!-- One item in cart <img src="https://img.icons8.com/ios/50/000000/shopping-cart.png" /> --}}
-{{!-- function() {
-$('.offcanvas-collapse').toggleClass('close')
-} --}}
+</div>
 
+
+   </header>
