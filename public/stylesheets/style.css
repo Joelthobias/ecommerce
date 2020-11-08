@@ -2,6 +2,22 @@ html,body {
         overflow-x: hidden;
         /* Prevent scroll on narrow devices */
       }
+.dataTables_wrapper .dataTables_filter input {
+	border: 1px solid green;
+	border-radius: 7px;
+	padding: 13px;
+	/* background-color: #f9f4f400; */
+	margin-left: 0px;
+	/* top: 1px; */
+	height: 10px;
+	position: fixed;
+	top: 15px;
+	left: 16%;
+	z-index: 1332;
+	color: #000;
+	background-color: #fff;
+	width: 30%;
+}
  .pro-img{
   margin-top: 2rem;
 	/* height: 21em; */
@@ -96,12 +112,12 @@ html,body {
         z-index: 1;
     }
 
-    .dropdown-content a {
-        color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-    }
+.dropdown-content a {
+	color: black;
+	padding: .81em 0 .1em 1em;
+	text-decoration: none;
+	display: block;
+}
 
     .dropdown-content a:hover {
         background-color: #ddd;
@@ -187,4 +203,17 @@ body {
 .nav-underline .active {
   font-weight: 500;
   color: var(--gray-dark);
+}
+.dataTables_wrapper .dataTables_length {
+	float: left;
+	display: none;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+	border: 1px solid #fff !important;
+	border-radius: 42px !important;
+	padding: 13px !important;
+	background-color: transparent;
+	margin-left: 0px;
+background-color: #fff !important;
 }

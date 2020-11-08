@@ -1,0 +1,40 @@
+<section>
+    <table class="table">
+        <tr>
+            <th>
+                Image 
+            </th>
+            <th>
+                about
+            </th>
+            <th>
+                about2
+            </th>
+        </tr>
+        {{#each orders}}
+        <tr>
+            <td>
+                {{#each products}}
+<img src="/product-images/{{ this.item }}.jpg " style="max-width: 54%;" class="img-fluid" alt=""></div>
+{{/each}}
+            </td>
+<div class="col-12">
+    {{#each ../a}}
+    <h1>
+{{product.name}}
+
+
+    </h1>
+    {{/each}}
+</div>
+
+            <td>
+           
+
+            </td>
+        </tr>
+{{/each}}
+
+
+    </table>
+</section>

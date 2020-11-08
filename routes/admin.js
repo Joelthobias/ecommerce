@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 const fs = require("fs");
 const adminhelper = require("../helpers/adminhelper");
+const userhelper = require("../helpers/user-helper");
 
 var productHelper = require("../helpers/product-helper");
 const verifyadmlogin = (req, res, next) => {
@@ -45,11 +46,19 @@ router.post("/login", function (req, res, next) {
     }
   });
 });
+router.get("/logout", function (req, res, next) {
+  
+      req.session.admin = null
+      req.session.adminloggedIn = false;
+
+      res.redirect("/min");
+    
+});
 /* GET users listing. */
 router.get("/", verifyadmlogin, (req, res, next) =>{
   productHelper.getAllProducts().then((products) => {
-    console.log(products);
-    res.render("admin/view-products", { admin: req.session.admin, products });
+    //console.log(products);
+    res.render("admin/admhome", { admin: req.session.admin, products });
   });
 });
 
@@ -63,7 +72,7 @@ router.post("/add-product", (req, res) => {
 let price= parseInt(req.body.price);
   productHelper.addproduct(req.body,price ,(id) => {
     let image = req.files.image;
-    console.log(id);
+   // console.log(id);
     image.mv("./public/product-images/" + id + ".jpg", (err, done) => {
       if (!err) {
         res.render("admin/add-product", { admin: req.session.admin });
@@ -94,7 +103,7 @@ router.get("/delete-product/:id",verifyadmlogin, (req, res) => {
 router.get("/edit-product/:id",verifyadmlogin, async (req, res) => {
   let product = await productHelper.getproductdetails(req.params.id);
   console.log(product);
-  res.render("admin/edit-product", {product,admin:req.session.admin});
+  res.render("admin/edit-product", {product,admin: req.session.admin});
 });
 
 
@@ -112,5 +121,20 @@ router.post("/edit-product/:id", (req, res) => {
     
   })
 
+  router.get('/viewpros',(req,res)=>{
+    productHelper.getAllProducts().then((products) => {
+    //console.log(products);
+    res.render("admin/view-products", { admin: req.session.admin, products });
+  });
+  })
+ router.get('/orders',verifyadmlogin,async(req,res)=>{
+   let orders=await adminhelper.getorders()
+  // let proid=orders.products.item
+   let a=await adminhelper.profromorder()
 
+
+ res.render('admin/view-orders',{a,admin: req.session.admin,orders})
+
+   
+ })
 module.exports = router;

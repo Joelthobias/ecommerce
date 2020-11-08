@@ -46,16 +46,22 @@
 
                         </a>
 
-                        <div class="dropdown-menu pl-2 dropdown-content ">
+                        <div class="dropdown-menu mt-n2 dropdown-content ">
 
                             {{#if user}}
-                                <a class="dropdown-item" href="">My profile</a>
-                                <a class="dropdown-item" href="/orders">orders</a>
+<a class="dropdown-item" href=""><small><img class="pr-2" src="https://img.icons8.com/fluent-systems-filled/20/000000/guest-male.png"/>My profile</small></a>
 
-                                <a class="dropdown-item" href="/logout">Logout</a>
+
+<a class="dropdown-item" href="/orders"><small><img class="pr-2" src="https://img.icons8.com/android/17/000000/wallet.png"/> Orders</small></a>
+
+
+
+                                <a class="dropdown-item" href="/logout"><small>Logout</small></a>
                             {{ else }}
-                                <a class="dropdown-item " href="/signin">New customer
+                                <a class="dropdown-item " href="/signin"> <small>
+New customer
                                     <span class="text-danger">signin</span>
+                                </small> 
                                 </a>
 
 

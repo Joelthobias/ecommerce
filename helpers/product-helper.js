@@ -33,7 +33,7 @@ product.price = parseInt(product.price);
         .removeOne({ _id: objectId(proid) })
         .then((response) => {
           resolve(response);
-          console.log(response);
+          //console.log(response);
         });
     });
   },

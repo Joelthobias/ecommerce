@@ -43,10 +43,11 @@ module.exports = {
             resolve(response);
           } else {
             console.log("Login failed");
-            resolve({ status: false });
+            resolve({ err: 'Wrong password' });
           }
         });
       } else {
+        resolve({err:'Email not found'})
         console.log("email not found");
       }
     });
@@ -165,9 +166,10 @@ return new Promise(async(resolve,reject)=>{
               product: { $arrayElemAt: ["$product", 0] },
             },
           },
+
         ])
         .toArray();
-      //console.log(cartItems);
+      console.log('1234567890000',cartItems);
       resolve(cartItems);
     });
   },
@@ -268,8 +270,8 @@ return new Promise(async(resolve,reject)=>{
         ])
         .toArray();
 
-      console.log("jjjjjjjjjjjjjjjjjjjjjjjjjjj");
-      console.log(total[0].total);
+   
+      //console.log(total[0].total);
       resolve(total[0].total);
     });
   },
@@ -317,14 +319,21 @@ gettemTotal: (userId) => {
         ])
         .toArray();
 
-      
-      console.log(total[0].total);
+      //9744390373
+      //console.log(total[0].total);
       resolve(total[0].total);
     });
   },
 
   placeorder: (order, products, total) => {
     return new Promise((resolve, reject) => {
+var d=new Date()
+var day=d.getDate()
+var month=d.getMonth()
+var year=d.getFullYear()
+var hour=d.getHours()
+var minute=d.getMinutes()
+var second=d.getSeconds()
       console.log(products);
       let status = order["payment-method"] === "COD" ? "placed" : "Pending";
       let OrderObj = {
@@ -334,12 +343,16 @@ gettemTotal: (userId) => {
           pincode: order.pincode,
         },
         userdetails: objectId(order.userId),
+        username:order.username,
         paymentmethod: order["payment-method"],
         totalAmount: total,
         products: products,
         status: status,
-        date: new Date(),
+        date:day+'/'+month+"/"+year ,
+        time:hour+':'+minute+':'+second,
+        
       };
+      console.log(OrderObj.date);
       db.get()
         .collection(collection.order_collection)
         .insertOne(OrderObj)
@@ -354,6 +367,13 @@ gettemTotal: (userId) => {
   },
   placeoneorder: (order, products, total) => {
     return new Promise((resolve, reject) => {
+      var d=new Date()
+var day=d.getDate()
+var month=d.getMonth()
+var year=d.getFullYear()
+var hour=d.getHours()
+var minute=d.getMinutes()
+var second=d.getSeconds()
       console.log(products);
       let status = order["payment-method"] === "COD" ? "placed" : "Pending";
       let OrderObj = {
@@ -363,11 +383,13 @@ gettemTotal: (userId) => {
           pincode: order.pincode,
         },
         userdetails: objectId(order.userId),
+        username:order.username,
         paymentmethod: order["payment-method"],
         totalAmount: total,
         products: products,
         status: status,
-        date: new Date(),
+       date:day+'/'+month+"/"+year ,
+        time:hour+':'+minute+':'+second,
       };
       db.get()
         .collection(collection.order_collection)

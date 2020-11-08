@@ -59,6 +59,7 @@ router.get("/login", function (req, res, next) {
   if (req.session.userloggedIn) {
     res.redirect("/");
   } else {
+    console.log(req.session.userloginErr);
     res.render("user/login", { 'userloginErr':req.session.userloginErr });
     req.session.userloginErr=false
   }
@@ -72,7 +73,7 @@ router.post("/login", function (req, res, next) {
 
       res.redirect("/");
     } else {
-      req.session.userloginErr="Invalid User Name Or Password"
+      req.session.userloginErr=response.err
       res.redirect("/login");
     }
   });
@@ -107,14 +108,16 @@ router.get("/logout", (req, res) => {
 
 router.get('/cart',verifylogin,async (req,res)=>{
  
-
 let products = await userhelper.getCartProducts(req.session.user._id);
 if(products!=0){
+  let cartcount=0
+cartcount=await userhelper.getcartcount(req.session.user._id)
   
   let total = await userhelper.getTotal(req.session.user._id);
   products.quantitiy = parseInt(products.quantitiy);
 products.price = parseInt(products.price)
   res.render("user/cart", {
+    cartcount,
     products,
     user: req.session.user,
     uses: req.session.user._id,
@@ -132,7 +135,7 @@ products.price = parseInt(products.price)
 }
 
 
-  console.log(products);
+  //console.log(products);
 })
 
 
@@ -170,23 +173,28 @@ router.post("/chngQuantitiy", (req, res, next) => {
 
 router.get('/place-order',verifylogin,async(req,res,next)=>{
   let total=await userhelper.getTotal(req.session.user._id)
-  res.render('user/placeorder',{total,user:req.session.user})
+   let cartcount=0
+cartcount=await userhelper.getcartcount(req.session.user._id)
+  res.render('user/placeorder',{total,user:req.session.user,cartcount})
 })
 
 router.get('/placeoneorder/:id',verifylogin,async(req,res)=>{
   userhelper.addtotemcart(req.params.id,req.session.user._id).then(()=>{
    
   })
+       let cartcount=0
+cartcount=await userhelper.getcartcount(req.session.user._id)
 
   let product=await userhelper.getprice(req.params.id)
     let products=product
     let total=product[0].price
 
-  res.render('user/placeoneorder',{products,total,user:req.session.user})
+  res.render('user/placeoneorder',{products,total,user:req.session.user,cartcount})
 })
 
 router.post('/place-one-order',async(req,res)=>{
   console.log(req.body);
+  
   let products=null
   products = await userhelper.gettemcartprolist(req.body.userId);
   let total = await userhelper.gettemTotal(req.body.userId);
@@ -225,23 +233,41 @@ router.post('/place-order',async(req,res)=>{
 
 
 router.get('/orders',verifylogin,async(req,res)=>{
-  let orders= await userhelper.getuserorders(req.session.user._id)
-  let proid=orders[0].products[0].item
+
+  let cartcount=0
+    let orders= 0
+  orders=await userhelper.getuserorders(req.session.user._id)
+cartcount=await userhelper.getcartcount(req.session.user._id)
+  if(orders!=0){
+
+
+    let proid=0
+    proid=orders[0].products[0].item
   console.log('Product Id :  ',proid);
   let product=await userhelper.viewpro(proid)
+
+  res.render('user/orders',{user:req.session.user,orders,product,cartcount})
+
+  }else{
+  res.render('user/orders',{user:req.session.user,cartcount})
+
+  }
   
-  res.render('user/orders',{user:req.session.user,orders,product})
+     
 })
 
 router.get("/view-order-product/:id", verifylogin, async(req, res) => {
     let products = await userhelper.getorderdproducts(req.params.id);
-
+     let cartcount=0
+cartcount=await userhelper.getcartcount(req.session.user._id)
   console.log(products);
-  res.render("user/view-order-product", { products,user:req.session.user });
+  res.render("user/view-order-product", { products,user:req.session.user,cartcount });
 });
 
-router.get("/order-sucess", (req, res) => {
-  res.render("user/order-s", { user: req.session.user });
+router.get("/order-sucess",async (req, res) => {
+       let cartcount=0
+cartcount=await userhelper.getcartcount(req.session.user._id)
+  res.render("user/order-s", { user: req.session.user,cartcount });
 });
 
  

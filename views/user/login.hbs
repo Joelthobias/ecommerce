@@ -1,10 +1,11 @@
 <form action="/login" method="POST" align="center" class="col-md-4 mx-auto mt-5">
     <h2 class="px-auto" align='center'><b>LOGIN</b> </h2>
 
-    {{#if userloginErr}}
+{{#if userloginErr}}
+
     <p class="text-danger error">{{userloginErr}}</p>
     
-    {{/if}}
+  {{/if}}
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
     <input type="email" autofocus class="form-control" name='email'id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">

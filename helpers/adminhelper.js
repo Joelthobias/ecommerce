@@ -1,4 +1,5 @@
 const bcrpt = require("bcrypt");
+const { resolve } = require("promise");
 var db = require("../config/connection");
 
 
@@ -46,4 +47,53 @@ module.exports = {
       }
     });
   },
+  getorders:()=>{
+    return new Promise((resolve,reject)=>{
+      db.get().collection('order').find({}).toArray().then((orders)=>{
+        resolve(orders)
+        console.log(orders);
+      })
+    })
+  },
+  profromorder:(userid)=>{
+    return new Promise(async(resolve,reject)=>{
+     let orderspro = await db
+        .get()
+        .collection('order')
+        .aggregate([
+          {
+            $match: { },
+          },
+          {
+            $unwind: "$products",
+          },
+          {
+            $project: {
+              item: "$products.item",
+              quantity: "$products.quantity",
+            },
+          },
+          {
+            $lookup: {
+              from: 'product',//collection
+              localField: "item",
+              foreignField: "_id",
+              as: "product",
+            },
+          },
+          {
+            $project: {
+              product: { $arrayElemAt: ["$product", 0] },
+            },
+          },
+
+        ])
+        .toArray();
+      // db.get().collection('order').find({}).toArray().then((orders)=>{
+
+      
+        console.log(orderspro);
+        resolve(orderspro)
+    })
+  }
 };
