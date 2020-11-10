@@ -1,5 +1,5 @@
 const bcrpt = require("bcrypt");
-const { resolve } = require("promise");
+const { resolve, all } = require("promise");
 var db = require("../config/connection");
 
 
@@ -65,12 +65,24 @@ module.exports = {
             $match: { },
           },
           {
+            $unwind:all,
+            $unwind:'$Deliveryaddress',
             $unwind: "$products",
           },
           {
             $project: {
+              orderid:'$_id',
+              username:'$username',
+              mobile:'$Deliveryaddress.mobile',
+              addres:'$Deliveryaddress.addres',
+              pincode:'$Deliveryaddress.pincode',
+              userdetails:'$userdetails',
               item: "$products.item",
-              quantity: "$products.quantity",
+              paymentmethod:'$paymentmethod',
+              status:'$status',
+              date:'$date',
+              time:'$time',
+              total:'$totalAmount'
             },
           },
           {
@@ -83,17 +95,26 @@ module.exports = {
           },
           {
             $project: {
+              orderid:1,
+              mobile:1,
+              addres: 1,
+              pincode: 1,
+              userdetails: 1,
+              paymentmethod: 1,
+              status: 1,
+              date: 1,
+              time: 1,
+              total:1,
+              username:1,
               product: { $arrayElemAt: ["$product", 0] },
             },
           },
 
         ])
         .toArray();
-      // db.get().collection('order').find({}).toArray().then((orders)=>{
-
-      
         console.log(orderspro);
         resolve(orderspro)
     })
-  }
+  },
+  
 };

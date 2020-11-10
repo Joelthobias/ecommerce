@@ -1,40 +1,114 @@
-<section>
-    <table class="table">
-        <tr>
-            <th>
-                Image 
-            </th>
-            <th>
-                about
-            </th>
-            <th>
-                about2
-            </th>
-        </tr>
-        {{#each orders}}
-        <tr>
-            <td>
-                {{#each products}}
-<img src="/product-images/{{ this.item }}.jpg " style="max-width: 54%;" class="img-fluid" alt=""></div>
-{{/each}}
-            </td>
-<div class="col-12">
-    {{#each ../a}}
-    <h1>
-{{product.name}}
+<section> <div class = "container"> <div class = "d-none d-md-block mt-3 container" > <table id = "table_id" class = "table mt-4"> <thead> {{!-- 
 
 
-    </h1>
-    {{/each}}
-</div>
+{{#if orders}} --}}
+                        <tr>
+                            <th scope="col">item</th>
+                            <th scope="">Product Details</th>
+                           
+                           
+                            <th scope="">Order Details</th>
+                           
+                        </tr>
+                </thead>
+                <tbody>
+{{#each response}}
+                        <tr>
+            {{#with product}}
 
-            <td>
-           
+                            <td>
+                                 <div class="col-5"> 
 
-            </td>
-        </tr>
-{{/each}}
+                                        <img src="/product-images/{{this._id}}.jpg " style="max-width: 54%;" class="img-fluid" alt="">
+                                    
+                                    </div>
+
+                            </td>                  
+                                <td>
+                                
+                                    
+                                   
+                                    {{this.name}} <br>
+                                   
+                                   
+                                </td>   
+            {{/with}}
+
+                            <td>
+                                <b>Name: </b>{{this.username}}
+                                <br>
+                                <b>ADDRESS: </b>{{this.addres}}<br>
+                                <b>Pincode: </b>{{this.pincode}}<br>
+                                <b>Mobile: </b>{{this.mobile}}<br>
+                                <b>Total: </b> {{this.total}}<br>
+                                <b>Payment Method: </b> {{this.paymentmethod}}<br>
+                                <b>Status: </b>{{this.status}}
+                            </td>
+                                {{!-- <td>
+                                    <a href="/view-order-product/{{ this._id }}" class="btn btn-primary">View Products</a>
 
 
-    </table>
+                                </td> --}}
+
+                        </tr>
+                   {{/each}}
+                     {{!-- <h1>No orders yet</h1> --}}
+                    {{!-- {{/if}} --}}
+                </tbody>
+            </table>
+        </div>
+
+<div class="d-block d-md-none ">
+<div class=" mt-5" >
+
+{{#each orders}}
+    {{#each products}}
+<hr>
+        <div onclick="location.href=''" class="row container px-4 py-2" >
+
+
+                    <div class="col-5">
+<img src="/product-images/{{ this.item }}.jpg " style="max-width: 34%;" class="img-fluid" alt=""></div>
+
+
+
+                    <div class="col-6">
+
+                        {{#each ../response}}
+
+                            <h5 style="text-transform: uppercase;">{{this._id}}</h5>
+                        {{/each}}
+                            <h6> <b>Orderd at {{../this.date}}</b></h6>
+                
+                    </div>
+                    <div class="col-1" align='right'>
+                            <i class=" mt-5 ml-auto arrow right"></i>
+<style>
+    .arrow {
+        border: solid black;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 3px;
+    }
+    .right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+</style>
+
+                    </div>
+                </div>
+                    {{/each}}
+
+                <hr>
+            {{/each}}
+
+
+        </div>
+    </div>
 </section>
+<script>
+        $(document).ready( function () {
+    $('#table_id').DataTable();
+} );
+</script>

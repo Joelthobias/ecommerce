@@ -130,10 +130,12 @@ router.post("/edit-product/:id", (req, res) => {
  router.get('/orders',verifyadmlogin,async(req,res)=>{
    let orders=await adminhelper.getorders()
   // let proid=orders.products.item
-   let a=await adminhelper.profromorder()
+   adminhelper.profromorder().then((response)=>{
+ res.render('admin/view-orders',{response,admin: req.session.admin})
+
+   })
 
 
- res.render('admin/view-orders',{a,admin: req.session.admin,orders})
 
    
  })
