@@ -1,7 +1,9 @@
-<section> <div class = "container"> <div class = "d-none d-md-block mt-3 container" > <table id = "table_id" class = "table mt-4"> <thead> {{!-- 
-
-
-{{#if orders}} --}}
+<section> 
+        {{#if response}}
+         <div class = "d-none d-md-block mt-3 container" >
+              <table id = "table_id" class = "table mt-4">
+                   <thead> 
+                       
                         <tr>
                             <th scope="col">item</th>
                             <th scope="">Product Details</th>
@@ -28,7 +30,12 @@
                                 
                                     
                                    
-                                    {{this.name}} <br>
+                                    <h4>
+                                        {{this.name}}
+                                    </h4> 
+                                    <h5>
+                                        {{this.price}}
+                                    </h5>
                                    
                                    
                                 </td>   
@@ -40,15 +47,15 @@
                                 <b>ADDRESS: </b>{{this.addres}}<br>
                                 <b>Pincode: </b>{{this.pincode}}<br>
                                 <b>Mobile: </b>{{this.mobile}}<br>
-                                <b>Total: </b> {{this.total}}<br>
+                                {{!-- <b>Total: </b> {{this.total}}<br> --}}
                                 <b>Payment Method: </b> {{this.paymentmethod}}<br>
                                 <b>Status: </b>{{this.status}}
                             </td>
-                                {{!-- <td>
-                                    <a href="/view-order-product/{{ this._id }}" class="btn btn-primary">View Products</a>
+                                <td>
+                                    <a href="/changeststus/{{ this.orderid }}" class="btn btn-primary">Update status</a>
 
 
-                                </td> --}}
+                                </td>
 
                         </tr>
                    {{/each}}
@@ -61,24 +68,24 @@
 <div class="d-block d-md-none ">
 <div class=" mt-5" >
 
-{{#each orders}}
-    {{#each products}}
+{{#each response}}
 <hr>
         <div onclick="location.href=''" class="row container px-4 py-2" >
 
+    {{#with product}}
 
                     <div class="col-5">
-<img src="/product-images/{{ this.item }}.jpg " style="max-width: 34%;" class="img-fluid" alt=""></div>
-
+<img src="/product-images/{{ this._id }}.jpg " style="max-width: 34%;" class="img-fluid" alt=""></div>
+{{/with}}
 
 
                     <div class="col-6">
 
-                        {{#each ../response}}
+                      
 
-                            <h5 style="text-transform: uppercase;">{{this._id}}</h5>
-                        {{/each}}
-                            <h6> <b>Orderd at {{../this.date}}</b></h6>
+                            <h5 style="text-transform: uppercase;">{{this.product.name}}</h5>
+                      
+                            <h6> <b>Orderd at {{this.date}}</b></h6>
                 
                     </div>
                     <div class="col-1" align='right'>
@@ -98,14 +105,15 @@
 
                     </div>
                 </div>
-                    {{/each}}
+                   
 
                 <hr>
             {{/each}}
-
-
-        </div>
-    </div>
+            </div>
+        {{else}}
+        <h4 class="text-center">No Orders Yet</h4>
+        {{/if}}
+    
 </section>
 <script>
         $(document).ready( function () {

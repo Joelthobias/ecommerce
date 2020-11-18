@@ -131,7 +131,15 @@ router.post("/edit-product/:id", (req, res) => {
    let orders=await adminhelper.getorders()
   // let proid=orders.products.item
    adminhelper.profromorder().then((response)=>{
- res.render('admin/view-orders',{response,admin: req.session.admin})
+     if(response.status==placed){
+        res.render('admin/view-orders',{response,admin: req.session.admin,placed})
+
+     }else if(response.status==Shipped){
+ res.render('admin/view-orders',{response,admin: req.session.admin,shipped})
+     }else{
+        res.render('admin/view-orders',{response,admin: req.session.admin,Delevierd})
+
+     }
 
    })
 
