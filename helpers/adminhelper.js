@@ -42,7 +42,7 @@ module.exports = {
         });
       } else {
         resolve({err:"Email Not found"})
-        console.log(err);
+        console.error();
         console.log("email not found");
       }
     });

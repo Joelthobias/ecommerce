@@ -22,6 +22,9 @@ html,body {
   margin-top: 2rem;
 	/* height: 21em; */
 }
+#table_id_filter label{
+  color: transparent;
+}
            .navbar,.bg-prmary {
                 background-color: #2874f0 !important;
 
