@@ -1,6 +1,8 @@
 const bcrpt = require("bcrypt");
+const { promise } = require("bcrypt/promises");
 const { resolve, all } = require("promise");
 var db = require("../config/connection");
+var objectId = require("mongodb").ObjectID;
 
 
 
@@ -112,9 +114,33 @@ module.exports = {
 
         ])
         .toArray();
-        console.log(orderspro);
+        //  console.log(orderspro);
         resolve(orderspro)
     })
   },
+  updatestatus:(orderid)=>{
+    return new Promise((resolve,reject)=>{
+      db.get().collection('order')
+        .updateOne(
+          { _id: objectId(orderid) },
+          {
+            $set: {
+              status:"shipped"
+            },
+          }
+        )
+        .then((response) => {
+          resolve(response);
+          //   console.log(product);
+        });
+        
+      
+    })
+  },
+  // updatestatuspost:(orderid)=>{
+  //   return new Promise((resolve,reject)=>{
+      
+  //   })
+  // }
   
 };

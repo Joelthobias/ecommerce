@@ -107,7 +107,12 @@ router.get("/edit-product/:id",verifyadmlogin, async (req, res) => {
 });
 
 router.get('/changeststus/:id', verifyadmlogin, async (req, res) => {
-  proid=req.params.id
+  orderid=req.params.id
+
+    adminhelper.updatestatus(orderid).then(()=>{
+      console.log("..............................................");
+    })
+    res.redirect('/min/orders')
   
 
 })

@@ -39,24 +39,24 @@
                                    
                                    
                                 </td>   
-            {{/with}}
+            
 
                             <td>
-                                <b>Name: </b>{{this.username}}
+                                <b>Name: </b>{{../this.username}}
                                 <br>
-                                <b>ADDRESS: </b>{{this.addres}}<br>
-                                <b>Pincode: </b>{{this.pincode}}<br>
-                                <b>Mobile: </b>{{this.mobile}}<br>
+                                <b>ADDRESS: </b>{{../this.addres}}<br>
+                                <b>Pincode: </b>{{../this.pincode}}<br>
+                                <b>Mobile: </b>{{../this.mobile}}<br>
                                 {{!-- <b>Total: </b> {{this.total}}<br> --}}
-                                <b>Payment Method: </b> {{this.paymentmethod}}<br>
-                                <b>Status: </b>{{this.status}}
+                                <b>Payment Method: </b> {{../this.paymentmethod}}<br>
+                                <b>Status: </b>{{../this.status}}
                             </td>
                                 <td>
-                                    <a href="/min/changeststus/{{ this.orderid }}" class="btn btn-primary">Update status</a>
+                                    <a href="/min/changeststus/{{ ../this.orderid }}" class="btn btn-primary">Update status</a>
 
 
                                 </td>
-
+{{/with}}
                         </tr>
                    {{/each}}
                      {{!-- <h1>No orders yet</h1> --}}
