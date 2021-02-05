@@ -40,12 +40,13 @@ router.get("/", async function (req, res, next) {
 });
 
 router.get('/view-product/:id', async (req, res) => {
-    let cartcount = '0'
-    if (req.session.user) {
-        cartcount = await userhelper.getcartcount(req.session.user._id)
 
-    }
-    userhelper.viewpro(req.params.id).then((product) => {
+    userhelper.viewpro(req.params.id).then(async(product) => {
+        let cartcount = '0'
+        if (req.session.user) {
+            cartcount = await userhelper.getcartcount(req.session.user._id)
+
+        }
         res.render("user/view", {
             user: req.session.user,
             product,

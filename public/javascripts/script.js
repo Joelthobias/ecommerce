@@ -6,6 +6,9 @@ function addtocart(proid) {
     success:(response)=>{
       if(response.status){
         let count=$('#cart-count').html()
+        let co=$('#cart-coun').html()
+        co=parseInt(co)+1 
+        $("#cart-coun").html(co)
         count=parseInt(count)+1 
         $("#cart-count").html(count)
       }

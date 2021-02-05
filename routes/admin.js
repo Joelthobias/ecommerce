@@ -106,6 +106,11 @@ router.get("/edit-product/:id",verifyadmlogin, async (req, res) => {
   res.render("admin/edit-product", {product,admin: req.session.admin});
 });
 
+router.get('/changeststus/:id', verifyadmlogin, async (req, res) => {
+  proid=req.params.id
+  
+
+})
 
 router.post("/edit-product/:id", (req, res) => {
   productHelper.updateProduct(req.params.id, req.body).then(()=>{
@@ -127,24 +132,24 @@ router.post("/edit-product/:id", (req, res) => {
     res.render("admin/view-products", { admin: req.session.admin, products });
   });
   })
- router.get('/orders',verifyadmlogin,async(req,res)=>{
-   let orders=await adminhelper.getorders()
-  // let proid=orders.products.item
-   adminhelper.profromorder().then((response)=>{
-     if(response.status=='placed'){
-        res.render('admin/view-orders',{response,admin: req.session.admin,placed})
+router.get('/orders', verifyadmlogin, async (req, res) => {
+    let orders = await adminhelper.getorders()
+    // let proid=orders.products.item
+    adminhelper.profromorder().then((response) => {
+        if (response.status == 'placed') {
+            res.render('admin/view-orders', {
+                response,
+                admin: req.session.admin,
+                placed
+            })
+        } else if (response.status == 'Shipped') {
+            res.render('admin/view-orders', {response, admin: req.session.admin})
+        } else {
+            res.render('admin/view-orders', {response, admin: req.session.admin})
+        }
+    })
+})
 
-     }else if(response.status=='Shipped'){
- res.render('admin/view-orders',{response,admin: req.session.admin})
-     }else{
-        res.render('admin/view-orders',{response,admin: req.session.admin})
-
-     }
-
-   })
 
 
-
-   
- })
 module.exports = router;
