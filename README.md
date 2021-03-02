@@ -28,3 +28,8 @@ ports
 /min
 
 thanks to  crossroads and @nikhilkilivayil sir
+
+
+
+user-name for admin : admin@gmail.com
+password : 123
