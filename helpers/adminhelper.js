@@ -118,14 +118,14 @@ module.exports = {
         resolve(orderspro)
     })
   },
-  updatestatus:(orderid)=>{
+  updatestatus:(orderid,status)=>{
     return new Promise((resolve,reject)=>{
       db.get().collection('order')
         .updateOne(
           { _id: objectId(orderid) },
           {
             $set: {
-              status:"shipped"
+              status:status
             },
           }
         )
@@ -137,10 +137,13 @@ module.exports = {
       
     })
   },
-  // updatestatuspost:(orderid)=>{
-  //   return new Promise((resolve,reject)=>{
+  checkstatus:(orderid)=>{
+    return new Promise(async(resolve,reject)=>{
+      let order=await db.get().collection('order').findOne({_id:objectId(orderid)})
+      resolve(order.status)
+      console.log(order.status);
       
-  //   })
-  // }
+    })
+  }
   
 };

@@ -106,12 +106,22 @@ router.get("/edit-product/:id",verifyadmlogin, async (req, res) => {
   res.render("admin/edit-product", {product,admin: req.session.admin});
 });
 
+//update status
 router.get('/changeststus/:id', verifyadmlogin, async (req, res) => {
   orderid=req.params.id
-
-    adminhelper.updatestatus(orderid).then(()=>{
-      console.log("..............................................");
+    adminhelper.checkstatus(orderid).then((status)=>{
+      console.log("hiiiiiiiiii   " + status);
+      if(status=="placed"){
+        adminhelper.updatestatus(orderid,"shipped").then(()=>{
+          console.log("..............................................");
+        })
+      }else if(status=="shipped"){
+        adminhelper.updatestatus(orderid,"deliverd").then(()=>{
+          console.log("..............................................");
+        })
+      }
     })
+
     res.redirect('/min/orders')
   
 

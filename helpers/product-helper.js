@@ -17,10 +17,7 @@ product.price = parseInt(product.price);
   getAllProducts: () => {
     return new Promise(async (resolve, reject) => {
       let products = await db
-        .get()
-        .collection(collection.PRODUCT_COLLECTION)
-        .find()
-        .toArray();
+        .get().collection(collection.PRODUCT_COLLECTION).find().toArray()
       resolve(products);
     });
   },
