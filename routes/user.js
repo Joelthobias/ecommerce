@@ -27,7 +27,7 @@ router.get("/", async function (req, res, next) {
     }
 
 
-    productHelper.getAllProducts().then((products) => { // console.log(products);
+    productHelper.getAllProducts().then((products) => {
         if (user) {
             res.render("user/view-products", {products, user, cartcount});
 
@@ -133,9 +133,25 @@ router.get('/cart', verifylogin, async (req, res) => {
 
      console.log(products);
 })
+router.get('/placeoneorder/:id', verifylogin, async (req, res) => {
+    userhelper.addtotemcart(req.params.id, req.session.user._id).then(() => {})
+    let cartcount = 0
+    cartcount = await userhelper.getcartcount(req.session.user._id)
+
+    let product = await userhelper.getprice(req.params.id)
+    let products = product
+    let total = product[0].price
+
+    res.render('user/placeoneorder', {
+        products,
+        total,
+        user: req.session.user,
+        cartcount
+    })
+})
 
 
-router.get('/add-to-cart/:id', verifylogin, (req, res) => {
+router.get('/add-to-cart/:id', verifylogin,(req, res) => {
     console.log("'api call '");
     userhelper.addtocart(req.params.id, req.session.user._id).then(() => {
         res.json({status: true})
@@ -159,7 +175,7 @@ router.post("/chngQuantitiy", (req, res, next) => {
             res.json(response);
         } else {
             res.redirect("/cart");
-            console.log('empt                           cccccccccccccccccccccccccccccccccccccarttttttttttttttttt');
+           
         }
     });
 });
@@ -175,22 +191,7 @@ router.get('/place-order', verifylogin, async (req, res, next) => {
     })
 })
 
-router.get('/placeoneorder/:id', verifylogin, async (req, res) => {
-    userhelper.addtotemcart(req.params.id, req.session.user._id).then(() => {})
-    let cartcount = 0
-    cartcount = await userhelper.getcartcount(req.session.user._id)
 
-    let product = await userhelper.getprice(req.params.id)
-    let products = product
-    let total = product[0].price
-
-    res.render('user/placeoneorder', {
-        products,
-        total,
-        user: req.session.user,
-        cartcount
-    })
-})
 
 router.post('/place-one-order', async (req, res) => {
     console.log(req.body);
