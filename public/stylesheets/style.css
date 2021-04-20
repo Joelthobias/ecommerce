@@ -142,12 +142,20 @@ body {
 .navbar-collapse{
 height: 56px;
 }
+
+
 }
 body {
   padding-top: 56px;
 }
-
+ .dn{
+    display: none;
+  }
 @media (max-width: 768px) {
+ .dn{
+    display: block;
+  }
+ 
   .offcanvas-collapse {
     position: fixed;
     top: 56px; /* Height of navbar */

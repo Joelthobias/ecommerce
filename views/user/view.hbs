@@ -1,38 +1,57 @@
 <section>
     <div class="container-fluid">
         {{#each product}}
-        <div class="row">
+<div class="col-12 dn   ">
+    <div class="container-fluid">
+        <h1 align="center"  class="as mt-5 pt-5">
+            {{ this.name }}
+        </h1>
+        <div class="ml-5 hGSR34">4.4<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMiI+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTYuNSA5LjQzOWwtMy42NzQgMi4yMy45NC00LjI2LTMuMjEtMi44ODMgNC4yNTQtLjQwNEw2LjUuMTEybDEuNjkgNC4wMSA0LjI1NC40MDQtMy4yMSAyLjg4Mi45NCA0LjI2eiIvPjwvc3ZnPg==" class="_2lQ_WZ"></div>
+            <h3 class="mt-5">{{ this.price }}
+            </h3>
+        </div>
+    </div>
+</div>
 
-        <div class="col-md-4   mx-auto">
-            <div class="col-12" align='center'>
-        <img src="/product-images/{{this._id}}.jpg " alt="" class="mx-auto pro-img img-fluid">
-
-            </div>
-        <div class="col-12">
-            
             <div class="row">
-
-            <div class="col-12 ">
-                <buttton onclick="addtocart('{{this._id}}')" class="btn on  ml-1"  style="width: 48%; background-color: #ff9f00;"> <svg class="mt-n1 mr-1" width="16" height="16" viewBox="0 0 16 15" xmlns="http://www.w3.org/2000/svg"><path class="" d="M15.32 2.405H4.887C3 2.405 2.46.805 2.46.805L2.257.21C2.208.085 2.083 0 1.946 0H.336C.1 0-.064.24.024.46l.644 1.945L3.11 9.767c.047.137.175.23.32.23h8.418l-.493 1.958H3.768l.002.003c-.017 0-.033-.003-.05-.003-1.06 0-1.92.86-1.92 1.92s.86 1.92 1.92 1.92c.99 0 1.805-.75 1.91-1.712l5.55.076c.12.922.91 1.636 1.867 1.636 1.04 0 1.885-.844 1.885-1.885 0-.866-.584-1.593-1.38-1.814l2.423-8.832c.12-.433-.206-.86-.655-.86" fill="#fff"></path></svg> ADD TO CART</buttton>
-                <script>
-                    console.log('{{this._id}}')
-                </script>
                 
-                <a href="/placeoneorder/{{this._id}}" class="btn on  float-right" style="width: 48%;"><img src="https://img.icons8.com/fluent-systems-filled/20/ffffff/lightning-bolt.png"/> BUY NOW</a>
-                
-            </div>
-            </div>
 
-        </div>
-        </div>
-        <div class="col-md-5 float-right container">
-            <div class="container-fluid">
-            <h1 class="as mt-5 pt-5"> {{this.name}} </h1>
-            <div class="hGSR34">4.4<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMiI+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTYuNSA5LjQzOWwtMy42NzQgMi4yMy45NC00LjI2LTMuMjEtMi44ODMgNC4yNTQtLjQwNEw2LjUuMTEybDEuNjkgNC4wMSA0LjI1NC40MDQtMy4yMSAyLjg4Mi45NCA0LjI2eiIvPjwvc3ZnPg==" class="_2lQ_WZ"></div>
-<h3 class="mt-5">{{this.price}} </h3>
+                <div class="col-md-4   mx-auto">
+                    <div class="col-12" align='center'>
+                        <img src="/product-images/{{ this._id }}.jpg " alt="" class="mx-auto pro-img img-fluid"></div>
+                            <div class="col-12">
+                                <div class="row">
+
+                                    <div class="col-12 ">
+                                        <buttton onclick="addtocart('{{ this._id }}')" class="btn on  ml-1" style="width: 48%; background-color: #ff9f00;">
+                                        <svg class="mt-n1 mr-1" width="16" height="16" viewBox="0 0 16 15" xmlns="http://www.w3.org/2000/svg">
+                                            <path class="" d="M15.32 2.405H4.887C3 2.405 2.46.805 2.46.805L2.257.21C2.208.085 2.083 0 1.946 0H.336C.1 0-.064.24.024.46l.644 1.945L3.11 9.767c.047.137.175.23.32.23h8.418l-.493 1.958H3.768l.002.003c-.017 0-.033-.003-.05-.003-1.06 0-1.92.86-1.92 1.92s.86 1.92 1.92 1.92c.99 0 1.805-.75 1.91-1.712l5.55.076c.12.922.91 1.636 1.867 1.636 1.04 0 1.885-.844 1.885-1.885 0-.866-.584-1.593-1.38-1.814l2.423-8.832c.12-.433-.206-.86-.655-.86" fill="#fff"></path>
+                                        </svg>
+                                        ADD TO CART</buttton>
+                                        <script>
+                                            console.log('{{ this._id }}')
+                                        </script>
+
+                                        <a href="/placeoneorder/{{ this._id }}" class="btn on  float-right" style="width: 48%;"><img src="https://img.icons8.com/fluent-systems-filled/20/ffffff/lightning-bolt.png"/>
+                                        BUY NOW</a>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                    </div>
+                    <div class="col-md-5 float-right container ">
+                        <div class="container-fluid">
+                            <h1 class="as mt-5 pt-5">
+                                {{ this.name }}
+                            </h1>
+                            <div class="hGSR34">4.4<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMiI+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTYuNSA5LjQzOWwtMy42NzQgMi4yMy45NC00LjI2LTMuMjEtMi44ODMgNC4yNTQtLjQwNEw2LjUuMTEybDEuNjkgNC4wMSA0LjI1NC40MDQtMy4yMSAyLjg4Mi45NCA0LjI2eiIvPjwvc3ZnPg==" class="_2lQ_WZ"></div>
+                                <h3 class="mt-5">{{ this.price }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        </div>
 
         {{/each}}
     </div>
