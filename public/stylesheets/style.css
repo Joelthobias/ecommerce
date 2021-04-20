@@ -151,9 +151,15 @@ body {
  .dn{
     display: none;
   }
+  .mb{
+    display: block;
+  }
 @media (max-width: 768px) {
  .dn{
     display: block;
+  }
+  .mb{
+    display: none;
   }
  
   .offcanvas-collapse {
