@@ -22,23 +22,24 @@
 
 
 
-        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault" >
 
-            <input class="form-control mr-sm-2 col-9 d-none d-md-block ml-md-auto" type="text" onkeyup="mFunction()" placeholder="Search" id="myInput"></li>
+            <input style="height: 31px;" class="form-control mr-sm-2 col-9 d-none d-md-block ml-md-auto"  type="text" onkeyup="mFunction()" placeholder="Search" id="myInput"></li>
 
 
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mx-auto">
                 <li class="nav-item active">
-                    <div class="dropdown ml-auto">
+                    <div class="dropdown " style="margin-top: -.3rem;">
 
 
                         <a type="button" style="text-decoration: none;" class="text-white dropbtn mx-3 pr-4">
 
 
                             {{#if user}}
-                                {{ user.name }}
+                                
+                                <a class="dropdown-item btn-inline mb-3 bg-primry up" style="height: 23px;padding-top: .01em;width: 5.5rem;" >{{ user.name }}</a>
                             {{ else }}
-                                <a class="dropdown-item btn-inline mb-3 bg-white" href="/login">Login</a>
+                                <a class="dropdown-item btn-inline mb-3 bg-white" style="height: 23px;padding-top: .01em;width: 5.5rem;" href="/login">Login</a>
 
 
                             {{/if}}
@@ -46,7 +47,7 @@
 
                         </a>
 
-                        <div class="dropdown-menu mt-n2 dropdown-content ">
+                        <div class="dropdown-menu  dropdown-content ">
 
                             {{#if user}}
 <a class="dropdown-item" href=""><small><img class="pr-2" src="https://img.icons8.com/fluent-systems-filled/20/000000/guest-male.png"/>My profile</small></a>
@@ -76,9 +77,8 @@ New customer
                 </li>
 
             </ul>
-            <input class="form-control cc mr-sm-2 col-9 d-block  d-md-none ml-md-auto" type="text" onkeyup="mFunction()" placeholder="Search" id="myInput"></li>
 
-
+{{#if user}}
             <a class="nav-link d-none d-md-block" href="/cart">
                 <h5>
                     <img class="mr-n4  " src="https://img.icons8.com/pastel-glyph/40/ffffff/shopping-cart--v2.png"/>
@@ -88,14 +88,14 @@ New customer
                 </h5>
             </a>
 
-
+{{/if}}
         </div>
 
 
     </nav>
-<div class="bg-prmary ">
+<div class="bg-prmary d-block d-md-none " style="padding-bottom: 1rem;">
 
-    <input class="form-control cc mr-sm-2 col-9 ml-5 d-block  d-md-none ml-md-auto" type="text" onkeyup="mFunction()" placeholder="Search" id="myInput"></li>
+    <input class="form-control cc mr-sm-2 col-9 col-sm-10 ml-5 d-block  d-md-none ml-md-auto" type="text" onkeyup="mFunction()" placeholder="Search" id="myInput" style="height: 31px;">
 
 
 </div>

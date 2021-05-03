@@ -18,6 +18,24 @@ html,body {
 	background-color: #fff;
 	width: 30%;
 }
+.card-title,.card-text {
+    margin-bottom: .0rem;
+    font-size: 0.9rem !important;
+}
+
+@media(max-width:300px){
+.col-w-12 {
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+  
+}
+
+
+
+
  .pro-img{
   margin-top: 2rem;
 	/* height: 21em; */
@@ -110,16 +128,22 @@ html,body {
         display: none;
         position: absolute;
         background-color: #f1f1f1;
-        min-width: 160px;
+        min-width: 150px;
         box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
         z-index: 1;
     }
-
+.up{
+  font-variant-caps: small-caps;
+}
 .dropdown-content a {
 	color: black;
-	padding: .81em 0 .1em 1em;
+	padding: 0 0 .1em 1em;
 	text-decoration: none;
 	display: block;
+}
+.dropdown-menu
+{
+  left: -28px;
 }
 
     .dropdown-content a:hover {
@@ -142,6 +166,7 @@ body {
 .navbar-collapse{
 height: 56px;
 }
+
 
 
 }
