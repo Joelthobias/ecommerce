@@ -1,3 +1,9 @@
+
+see live project at  https://ecommercejoel.glitch.me
+
+
+
+
 This is a template of e commerce website using 
 node.js , express ,Mongodb and handlebars 
 
@@ -16,7 +22,7 @@ npm install
 npm start
 =======
 
-it runs on port 8000  localhost:8000
+it runs on port 3000  localhost:3000
 =======
 the avilable ports are
 
