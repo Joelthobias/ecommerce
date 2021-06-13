@@ -30,50 +30,53 @@
 {{/each}}
 </datalist> --}}
 <form action="" class=" mr-sm-2 col-9 d-none d-md-flex ml-md-auto"  method="get">
-            <input onkeyup="search_animal()" autocomplete="off" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  name="pro" class="form-control mr-sm-2 col-9 d-none d-md-block mr-md-auto"  type="text"  placeholder="Search" >
-            <div style="width: 72%;margin-left:1rem;left:0;"  class="dropdown-menu form-controll" aria-labelledby="dropdownMenuButton">
-                {{#each products}}
+            <input onkeyup="myFunction()" autocomplete="off" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  name="pro" class="form-control mr-sm-2 col-9 d-none d-md-block mr-md-auto"  type="text"  placeholder="Search" >
+            <div style="width: 72%;margin-left:1rem;left:0;"  class="dropdown-menu form-controll"  id="v" aria-labelledby="dropdownMenuButton">
+                
+                <ul style="padding: 0;" id="myUL">{{#each products}}
+                <li >
                 <a  class="dropdown-item id" href="/view-product/{{this._id}}" id="id">{{this.name}} </a>
+
+                </li>
                 {{/each}}
+                </ul>
 
             </div>
-            
-            <button class="  col-2  btn btn-warning p-1 mr-auto" type="submit"  class="button">Submit</button>
 </form>
  
 
-    <script>
-        // JavaScript code
-function search_animal() {
+<script>
+function myFunction(){
+        var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById("dropdownMenuButton");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
 
-	let input = document.getElementById('dropdownMenuButton').value
-
-	let x = document.getElementsByClassName('id');
-    console.log(input)
-	for (i = 0; i < x.length; i++) {
-		if (!x[i].innerHTML.toLowerCase()) {
-			x[i].style.display="none";
-		}
-		else {
-			x[i].style.display="block";				
-		}
-	}
 }
-
-    </script>
+</script>
             <ul class="navbar-nav mr-4">
                 <li class="nav-item active">
-                    <div class="dropdown ml-auto" style="margin-top: -.3rem;">
+                    <div class="dropdown mx-auto">
 
 
-                        <a type="button" style="text-decoration: none;" class="text-white  btn dropbtn  pr-4 ml-auto">
+                        <a type="button" style="text-decoration: none;" class="text-white  btn dropbtn  pr-4 mx-auto">
 
 
                             {{#if user}}
                                 
-                                <a class="dropdown-item btn btn-inline mb-3 bg-primry up"  >{{ user.name }}</a>
+                                <a class="dropdown-item btn btn-inline mb-3 bg-light up"  >{{ user.name }}</a>
                             {{ else }}
-                                <a class="dropdown-item btn btn-inline mb-3 bg-white ml-auto" href="/login ">Login</a>
+                                <a class="dropdown-item btn btn-inline mb-3 bg-white mx-auto" href="/login ">Login</a>
 
 
                             {{/if}}
@@ -137,8 +140,11 @@ New customer
 
    </header>
 <style>
-    .id:hover{
+    {{!-- .id:hover{
         background-color: #ffc107 !important ;
         color: #fff;
+    } --}}
+    ul{
+        list-style: none;
     }
 </style>
