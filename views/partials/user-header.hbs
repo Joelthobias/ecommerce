@@ -24,22 +24,56 @@
 
         <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault" >
 
-            <input style="height: 31px;" class="form-control mr-sm-2 col-9 d-none d-md-block ml-md-auto"  type="text" onkeyup="mFunction()" placeholder="Search" id="myInput"></li>
+{{!-- <datalist id="pro">
+{{#each pros}}
+  <option value="{{this.name}}">
+{{/each}}
+</datalist> --}}
+<form action="" class=" mr-sm-2 col-9 d-none d-md-flex ml-md-auto"  method="get">
+            <input onkeyup="search_animal()" autocomplete="off" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  name="pro" class="form-control mr-sm-2 col-9 d-none d-md-block mr-md-auto"  type="text"  placeholder="Search" >
+            <div style="width: 72%;margin-left:1rem;left:0;"  class="dropdown-menu form-controll" aria-labelledby="dropdownMenuButton">
+                {{#each products}}
+                <a  class="dropdown-item id" href="/view-product/{{this._id}}" id="id">{{this.name}} </a>
+                {{/each}}
 
+            </div>
+            
+            <button class="  col-2  btn btn-warning p-1 mr-auto" type="submit"  class="button">Submit</button>
+</form>
+ 
 
-            <ul class="navbar-nav mx-auto">
+    <script>
+        // JavaScript code
+function search_animal() {
+
+	let input = document.getElementById('dropdownMenuButton').value
+
+	let x = document.getElementsByClassName('id');
+    console.log(input)
+	for (i = 0; i < x.length; i++) {
+		if (!x[i].innerHTML.toLowerCase()) {
+			x[i].style.display="none";
+		}
+		else {
+			x[i].style.display="block";				
+		}
+	}
+}
+
+    </script>
+            <ul class="navbar-nav mr-4">
                 <li class="nav-item active">
-                    <div class="dropdown " style="margin-top: -.3rem;">
+                    <div class="dropdown ml-auto" style="margin-top: -.3rem;">
 
 
-                        <a type="button" style="text-decoration: none;" class="text-white dropbtn mx-3 pr-4">
+                        <a type="button" style="text-decoration: none;" class="text-white  btn dropbtn  pr-4 ml-auto">
 
 
                             {{#if user}}
                                 
-                                <a class="dropdown-item btn-inline mb-3 bg-primry up" style="height: 23px;padding-top: .01em;width: 5.5rem;" >{{ user.name }}</a>
+                                <a class="dropdown-item btn btn-inline mb-3 bg-primry up"  >{{ user.name }}</a>
                             {{ else }}
-                                <a class="dropdown-item btn-inline mb-3 bg-white" style="height: 23px;padding-top: .01em;width: 5.5rem;" href="/login">Login</a>
+                                <a class="dropdown-item btn btn-inline mb-3 bg-white ml-auto" href="/login ">Login</a>
 
 
                             {{/if}}
@@ -95,10 +129,16 @@ New customer
     </nav>
 <div class="bg-prmary d-block d-md-none " style="padding-bottom: 1rem;">
 
-    <input class="form-control cc mr-sm-2 col-9 col-sm-10 ml-5 d-block  d-md-none ml-md-auto" type="text" onkeyup="mFunction()" placeholder="Search" id="myInput" style="height: 31px;">
+    <input list="pro" class="form-control cc mr-sm-2 col-9 col-sm-10 ml-5 d-block  d-md-none ml-md-auto" type="text" onkeyup="mFunction()" placeholder="Search" id="myInput" style="height: 31px;">
 
 
 </div>
 
 
    </header>
+<style>
+    .id:hover{
+        background-color: #ffc107 !important ;
+        color: #fff;
+    }
+</style>

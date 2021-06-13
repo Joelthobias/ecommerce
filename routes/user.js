@@ -1,6 +1,7 @@
 const {response} = require("express");
 var express = require("express");
 const {reset} = require("nodemon");
+const { resolve } = require("promise");
 var router = express.Router();
 var productHelper = require("../helpers/product-helper");
 const userhelper = require("../helpers/user-helper");
@@ -14,9 +15,18 @@ const verifylogin = (req, res, next) => {
     }
 }
 
+// function datalist(req,res,next){
+//         productHelper.getAllProducts().then((pros)=>{
+//         return pros;
+//         })
+        
+// }
 
 /* GET home page. */
-router.get("/", async function (req, res, next) {
+router.get("/" ,async (req, res, next) =>{
+
+            
+
     let cartcount = null
 
     user = req.session.user
@@ -29,10 +39,11 @@ router.get("/", async function (req, res, next) {
 
     productHelper.getAllProducts().then((products) => {
         if (user) {
+
             res.render("user/view-products", {products, user, cartcount});
 
         } else {
-
+            
             res.render("user/view-products", {products, cartcount});
 
         }
